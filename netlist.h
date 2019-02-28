@@ -1,13 +1,13 @@
+
+#ifndef _NETLIST_H_
+#define _NETLIST_H_
+
 #include<stdio.h>
 #include<stdlib.h>
 #include "segment.h"
 #include "point.h"
 #include "cell_segment.h"
 #include "reseau.h"
-
-
-#ifndef _NETLIST_H_
-#define _NETLIST_H_
 
 
 typedef struct netlist {

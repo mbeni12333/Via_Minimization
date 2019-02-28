@@ -1,9 +1,9 @@
+#ifndef _POINT_H_
+#define _POINT_H_
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "cell_segment.h"
-
-#ifndef _POINT_H_
-#define _POINT_H_
 
 typedef struct point{
 
@@ -12,5 +12,7 @@ typedef struct point{
     Cell_segment* Lincid;/* Liste des segments incidents a ce point */
 
 } Point;
+
+Point* initialize_point(double x, double y, int num_res);
 
 #endif

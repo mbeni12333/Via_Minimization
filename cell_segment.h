@@ -8,7 +8,7 @@
 #include "segment.h"
 /*Ceci est une liste qui vas contenir tout les segments
  qui intersectent avec un certain segment*/
- struct segment;
+struct segment;
 typedef struct cell_segment{
 
     struct segment* seg;

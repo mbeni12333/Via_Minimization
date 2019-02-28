@@ -1,11 +1,11 @@
+#ifndef _RESEAU_H_
+#define _RESEAU_H_
+
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "cell_segment.h"
 #include "point.h"
-
-#ifndef _RESEAU_H_
-#define _RESEAU_H_
 
 
 typedef struct reseau{
@@ -15,5 +15,7 @@ typedef struct reseau{
     Point* *T_Pt;  /* Tableau de pointeurs sur chaque point de ce reseau */
 
 }Reseau;
+
+Reseau* initilize_reseau(int NumRes, int NbPt);
 
 #endif
