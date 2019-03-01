@@ -24,5 +24,10 @@ typedef struct netlist {
 Netlist* initialize_netlist(int NbRes);
 /*Cette fonction permet de lire un reseau*/
 Netlist* read_net_from_file(char* file);
+/*Creation de copie*/
+Netlist* copie_netlist(Netlist* nl);
+/*Afficher une netlist*/
+void afficher_netlist(Netlist* nl);
+
 
 #endif
