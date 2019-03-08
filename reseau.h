@@ -17,5 +17,5 @@ typedef struct reseau{
 }Reseau;
 
 Reseau* initilize_reseau(int NumRes, int NbPt);
-
+void afficher_reseau(Reseau* res);
 #endif

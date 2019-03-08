@@ -17,18 +17,18 @@ typedef struct cell_segment{
 } Cell_segment;
 
 /**************************************************************
-*                       Fonction de point                     *  
+*                       Fonction de Cell_segment              *
 **************************************************************/
 /*Fonction d'initialisation d'une cellule*/
-Cell_segment* initialisation(Segment* seg);
+Cell_segment* initialisation(struct segment* seg);
 /*Fonction ajouter_segment*/
-int ajouter_segment(Cell_segment** cell_seg, Segment* addme);
+int ajouter_segment(Cell_segment** cell_seg, struct segment* addme);
 /*Fonction qui supprime un segment*/
-int supprime_segment(Segment** suppme);
+int supprime_segment(struct segment** suppme);
 /*Fonction pour verifier si liste vide*/
 int cell_seg_vide(Cell_segment* cell_seg);
 /*Creation de copie*/
 Cell_segment* copie_cell_segment(Cell_segment* cell_seg);
 /*Afficher une netlist*/
-void afficher_cell_segment(Cell_segment* cell_seg);
+void afficher_cell_segment(Cell_segment* cell_seg, char* tab);
 #endif
