@@ -62,6 +62,6 @@ Description du probleme + description solutoin
 
 
 ## Ressources
-<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.735.8064&rep=rep1&type=pdf">algo genetique</a>
-<a href="https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes">Latex pour le rapport finale</a>
-<a href="https://openclassrooms.com/fr/courses/1343806-pygtk/1343942-glade">Glade pour interface graphique facile</a>
+<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.735.8064&rep=rep1&type=pdf">algo genetique</a><br/>
+<a href="https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes">Latex pour le rapport finale</a><br/>
+<a href="https://openclassrooms.com/fr/courses/1343806-pygtk/1343942-glade">Glade pour interface graphique facile</a><br/>
