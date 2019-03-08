@@ -17,3 +17,6 @@ Segment* initialize_segment(int NumRes, int p1, int p2, int HouV){
   // et finallement on retourene le pointeur
   return temp;
 }
+void afficher_segment(Segment* seg){
+  printf("%s", strcmp(seg->HouV) ? "V":"H");
+}

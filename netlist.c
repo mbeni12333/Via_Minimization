@@ -55,7 +55,7 @@ Netlist* read_net_from_file(char* file){
     // on lit tout les points du reseau
     int j;
     for(j=0; j<NbPt; j++){
-      // NumPt / x / y 
+      // NumPt / x / y
       int NumPt = GetEntier(f);
       double x = GetReel(f);
       double y = GetReel(f);
@@ -73,7 +73,7 @@ Netlist* read_net_from_file(char* file){
 
       int HouV = T_Pt[p1]->x == T_Pt[p2]->x;
       // on cree le segment
-      Segment* current_segment =  initialize_segment(p1, p2, HouV);
+      Segment* current_segment =  initialize_segment(NumRes , p1, p2, HouV);
 
       // on ajoute l'element au deux liste de p1 et p2
       ajouter_segment(&T_Pt[p1]->Lincid, current_segment);
@@ -82,7 +82,9 @@ Netlist* read_net_from_file(char* file){
   }
 }
 /*Creation de copie*/
-Netlist* copie_netlist(Netlist* nl);
+Netlist* copie_netlist(Netlist* nl){
+  return NULL;
+}
 /*Afficher une netlist*/
 void afficher_netlist(Netlist* nl){
   if(nl == NULL){
@@ -91,9 +93,9 @@ void afficher_netlist(Netlist* nl){
   }
   // on affiche tout les reseau
   int i;
-  Printf("Affichage de Netlist (%d Reseaux) : \n", nl->NbRes);
+  printf("Affichage de Netlist (%d Reseaux) : \n", nl->NbRes);
   for(i=0; nl->NbRes; i++){
-    // on affiche le reseau i (reste a savoir ) 
+    // on affiche le reseau i (reste a savoir )
     afficher_reseau(nl->T_Res[i]);
   }
   printf("Fin de l'affichage \n");
