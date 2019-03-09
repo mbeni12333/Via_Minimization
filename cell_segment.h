@@ -30,5 +30,5 @@ int cell_seg_vide(Cell_segment* cell_seg);
 /*Creation de copie*/
 Cell_segment* copie_cell_segment(Cell_segment* cell_seg);
 /*Afficher une netlist*/
-void afficher_cell_segment(Cell_segment* cell_seg, char* tab);
+void afficher_cell_segment(Cell_segment* cell_seg);
 #endif

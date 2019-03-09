@@ -34,6 +34,6 @@ void afficher_reseau(Reseau* res){
   printf("Reseau %d : (%d points)\n", res->NumRes, res->NbPt);
   int i;
   for(i=0; i<res->NbPt;i++){
-    afficher_point(res->T_Pt[i], "\t");
+    afficher_point(res->T_Pt[i]);
   }
 }

@@ -18,6 +18,7 @@ Netlist* initialize_netlist(int NbRes){
     return NULL;
   }// sinon
 
+  temp->T_Res = T_Res;
   // mettre case a NULL
   return temp;
 }
@@ -39,7 +40,9 @@ Netlist* read_net_from_file(char* file){
 
   // on cree le Netlist
   Netlist* netlist = initialize_netlist(NbRes);
-
+  if(!netlist){
+    return NULL;
+  }
   // on lit NbRes reseaux
   int i;
   for(i=0; i<NbRes; i++){
@@ -51,17 +54,23 @@ Netlist* read_net_from_file(char* file){
 
     // on cree le reseau et on l'ajoute au netlist
     Reseau* current_reseau = initilize_reseau(NumRes, NbPt);
+    if(!current_reseau){
+      return NULL;
+    }
     netlist->T_Res[NumRes] = current_reseau;
     // on lit tout les points du reseau
     int j;
     for(j=0; j<NbPt; j++){
       // NumPt / x / y
       int NumPt = GetEntier(f);
-      double x = GetReel(f);
-      double y = GetReel(f);
+      double x = GetEntier(f);
+      double y = GetEntier(f);
 
       // on cree le point et on l'ajoute au reseau
       Point* current_point = initialize_point(x, y, NumRes);
+      if(!current_point){
+        return NULL;
+      }
       current_reseau->T_Pt[NumPt] = current_point;
     }
     Point** T_Pt = current_reseau->T_Pt;
@@ -74,12 +83,15 @@ Netlist* read_net_from_file(char* file){
       int HouV = T_Pt[p1]->x == T_Pt[p2]->x;
       // on cree le segment
       Segment* current_segment =  initialize_segment(NumRes , p1, p2, HouV);
-
+      if(!current_segment){
+        return NULL;
+      }
       // on ajoute l'element au deux liste de p1 et p2
       ajouter_segment(&T_Pt[p1]->Lincid, current_segment);
       ajouter_segment(&T_Pt[p2]->Lincid, current_segment);
     }
   }
+  return netlist;
 }
 /*Creation de copie*/
 Netlist* copie_netlist(Netlist* nl){
@@ -94,7 +106,7 @@ void afficher_netlist(Netlist* nl){
   // on affiche tout les reseau
   int i;
   printf("Affichage de Netlist (%d Reseaux) : \n", nl->NbRes);
-  for(i=0; nl->NbRes; i++){
+  for(i=0; i<nl->NbRes; i++){
     // on affiche le reseau i (reste a savoir )
     afficher_reseau(nl->T_Res[i]);
   }

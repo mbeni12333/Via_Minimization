@@ -36,16 +36,19 @@ int ajouter_segment(Cell_segment** cell_seg, Segment* addme){
 /*Fonction qui supprime un segment*/
 int supprime_segment(Segment** suppme){return 0;}
 /*Fonction pour verifier si liste vide*/
-int cell_seg_vide(Cell_segment* cell_seg){return 0;}
+int cell_seg_vide(Cell_segment* cell_seg){
+  return cell_seg == NULL;
+}
 /*Creation de copie*/
 Cell_segment* copie_cell_segment(Cell_segment* cell_seg){return NULL;}
 /*Afficher une netlist*/
-void afficher_cell_segment(Cell_segment* cell_seg, char* tab){
+void afficher_cell_segment(Cell_segment* cell_seg){
 
-    printf("%sliste:\n%s", tab, tab);
+    printf("\t\tliste:\n\t\t");
     while(cell_seg != NULL){
         afficher_segment(cell_seg->seg);
         printf("->");
+        cell_seg = cell_seg->suiv;
     }
     printf("NULL\n");
 

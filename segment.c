@@ -12,11 +12,13 @@ Segment* initialize_segment(int NumRes, int p1, int p2, int HouV){
   temp->NumRes = NumRes;// numero du reseau
   temp->p1 = p1; // le premier point
   temp->p2 = p2; // le deuxieme point
+  temp->HouV=HouV;// 0 horizontal 1 vertical
   temp->Lintersec = NULL; // il n'y a pas d'intersection pour l'instant
 
   // et finallement on retourene le pointeur
   return temp;
 }
 void afficher_segment(Segment* seg){
-  printf("%s", strcmp(seg->HouV) ? "V":"H");
+  char c = (seg->HouV == 0) ? 'H':'V';
+  printf("%c", c);
 }

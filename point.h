@@ -23,5 +23,5 @@ Point* initialize_point(double x, double y, int num_res);
 /*Creation de copie*/
 Point* copie_point(Point* pt);
 /*Afficher une netlist*/
-void afficher_point(Point* pt,  char* tab);
+void afficher_point(Point* pt);
 #endif
