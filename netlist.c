@@ -98,7 +98,7 @@ Netlist* copie_netlist(Netlist* nl){
   return NULL;
 }
 /*Afficher une netlist*/
-void afficher_netlist(Netlist* nl, SVGwriter* svg){
+void afficher_netlist(Netlist* nl){
   if(nl == NULL){
     fprintf(stderr, "Netlist Vide !");
     return;
@@ -108,8 +108,8 @@ void afficher_netlist(Netlist* nl, SVGwriter* svg){
   printf("Affichage de Netlist (%d Reseaux) : \n", nl->NbRes);
   for(i=0; i<nl->NbRes; i++){
     // on affiche le reseau i (reste a savoir )
-    SVGlineRandColor(svg);
-    afficher_reseau(nl->T_Res[i], svg, nl);
+    SVGlineRandColor(&img);
+    afficher_reseau(nl->T_Res[i]);
   }
   printf("Fin de l'affichage \n");
 }
@@ -119,7 +119,7 @@ void visualiser_netlist(Netlist* nl, char* nomFichier){
 
   // on initilise un svgwriter
   SVGwriter svg;
-  SVGinit(&svg, nomFichier, 1000, 4000);
+  SVGinit(&img, nomFichier, 1000, 4000);
   /* test ligne
   SVGpoint(&svg, 10, 10);
   SVGpoint(&svg, 10, 400);
@@ -127,10 +127,10 @@ void visualiser_netlist(Netlist* nl, char* nomFichier){
   SVGpoint(&svg, -30, 30);
   SVGpoint(&svg, 2000, 30);
   SVGline(&svg, -30, 30, 2000, 30);*/
-  afficher_netlist(nl, &svg);
+  afficher_netlist(nl);
   
 
   // on finalise le fichier
-  SVGfinalize(&svg);
+  SVGfinalize(&img);
   // on libere l'espace memoire
 }

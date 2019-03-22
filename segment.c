@@ -18,10 +18,10 @@ Segment* initialize_segment(int NumRes, int p1, int p2, int HouV){
   // et finallement on retourene le pointeur
   return temp;
 }
-void afficher_segment(Segment* seg, SVGwriter* svg, Netlist* nl){
+void afficher_segment(Segment* seg){
   char c = (seg->HouV == 0) ? 'H':'V';
-  printf("%c(%d,%d)", c, seg->p1, seg->p2);
-  if(svg != NULL){
+  printf("%c", c);
+  /*if(svg != NULL){
     double xa, xb, ya, yb;
     Point** pt = nl->T_Res[seg->NumRes]->T_Pt;
     xa=pt[seg->p1]->x;
@@ -29,5 +29,5 @@ void afficher_segment(Segment* seg, SVGwriter* svg, Netlist* nl){
     xb=pt[seg->p2]->x;
     yb=pt[seg->p2]->y;
     SVGline(svg, xa, ya, xb, yb);
-  }
+  }*/
 }

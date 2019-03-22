@@ -42,11 +42,11 @@ int cell_seg_vide(Cell_segment* cell_seg){
 /*Creation de copie*/
 Cell_segment* copie_cell_segment(Cell_segment* cell_seg){return NULL;}
 /*Afficher une netlist*/
-void afficher_cell_segment(Cell_segment* cell_seg, SVGwriter* svg, Netlist* nl){
+void afficher_cell_segment(Cell_segment* cell_seg){
 
     printf("\t\tliste:\n\t\t");
     while(cell_seg != NULL){
-        afficher_segment(cell_seg->seg, svg, nl);
+        afficher_segment(cell_seg->seg);
         printf("->");
         cell_seg = cell_seg->suiv;
     }
