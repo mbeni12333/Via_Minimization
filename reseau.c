@@ -25,15 +25,17 @@ Reseau* initilize_reseau(int NumRes, int NbPt){
   // finallement on retourne le pointeur
   return temp;
 }
-void afficher_reseau(Reseau* res){
-  if(res == NULL){
-    fprintf(stderr, "Reseau Vide !");
-    return;
-  }
-// on affiche tout les points
-  printf("Reseau %d : (%d points)\n", res->NumRes, res->NbPt);
+
+void afficher_point(Reseau* rs, char* tab = ""){
+    if(rs == NULL){
+      fprintf(stderr, "Netlist Vide !");
+      return;
+    }
+  // on affiche tout les points
   int i;
-  for(i=0; i<res->NbPt;i++){
-    afficher_point(res->T_Pt[i]);
+  Printf("Affichage de Reseau %d (%d Points) : \n", rs->NumRes, rs->NbPt);
+  for(i=0; rs->NbPt; i++){
+    // on affiche le reseau i (reste a savoir ) 
+    afficher_point(rs->T_Pt[i], "\t");
   }
 }

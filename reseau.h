@@ -16,6 +16,16 @@ typedef struct reseau{
 
 }Reseau;
 
+
+
+/**************************************************************
+*                       Fonction de point                     *  
+**************************************************************/
+/*Fonction d'initialisation*/
 Reseau* initilize_reseau(int NumRes, int NbPt);
-void afficher_reseau(Reseau* res);
+/*Creation de copie*/
+Reseau* copie_netlist(Reseau* rs);
+/*Afficher une reseau*/
+void afficher_point(Reseau* rs);
+
 #endif

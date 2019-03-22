@@ -18,7 +18,7 @@ Cell_segment* initialize_cell_segment(Segment* seg){
 int ajouter_segment(Cell_segment** cell_seg, Segment* addme){
     // on cree l'element
     Cell_segment* temp = initialize_cell_segment(addme) ;
-
+    
     if(!temp){
         fprintf(stderr, "Erreur d'initialisation cell_seg in ajouter_segment\n");
         return 1;
@@ -36,19 +36,16 @@ int ajouter_segment(Cell_segment** cell_seg, Segment* addme){
 /*Fonction qui supprime un segment*/
 int supprime_segment(Segment** suppme){return 0;}
 /*Fonction pour verifier si liste vide*/
-int cell_seg_vide(Cell_segment* cell_seg){
-  return cell_seg == NULL;
-}
+int cell_seg_vide(Cell_segment* cell_seg){return 0;}
 /*Creation de copie*/
 Cell_segment* copie_cell_segment(Cell_segment* cell_seg){return NULL;}
 /*Afficher une netlist*/
-void afficher_cell_segment(Cell_segment* cell_seg){
-
-    printf("\t\tliste:\n\t\t");
+void afficher_cell_segment(Cell_segment* cell_seg, char* tab = ""){
+    
+    prtinf("%sliste:\n%s", tab, tab);
     while(cell_seg != NULL){
         afficher_segment(cell_seg->seg);
         printf("->");
-        cell_seg = cell_seg->suiv;
     }
     printf("NULL\n");
 

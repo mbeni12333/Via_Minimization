@@ -30,12 +30,9 @@ Probleme de Via Minimization
 Dans ce projet, nous allons nous int ́eresser a cette derniere ́etape de conception appelee affectation
 des reseaux sur deux faces
 
-
-
 # Usage
 ```
-  ./tests_elemntaires fichier
-  ./VisuNetlist fichier
+  Ecrire la commande ici
 ```
 
 # Convention de collaboration
@@ -48,20 +45,10 @@ Description du probleme + description solutoin
 + comment continuer
 
 ## ToDO list
-- [X] Mieux documenter la page d'acceuil*
+- [ ] Mieux documenter la page d'acceuil*
 - [ ] Commencer a ecrire le rapport **
 - [ ] Expliquer le probleme plus clairement***
-- [X] fonctions de base (affichage, ajout, suppresion, liberation, initialisation)**
-- [ ] Imprementaion de l'algorithme de detection d'intersection**
-- [ ] Detection de cycle impair***
-- [ ] Visualiser les circuits avec un fichier svg**
-- [ ] mesure performance individuel des fonctions haut niveau (netlist , et les algo principeau)
-- [X] Collecte de ressource sur les different algorithme à utiliser*
-- [ ] interface graphique GTK
-- [ ] implementation des algos plus interessant (Genetic, Integer linear prog, heuristic)
+- [ ] Collecte de ressource sur les different algorithme à utiliser*
 
 
 ## Ressources
-<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.735.8064&rep=rep1&type=pdf">algo genetique</a><br/>
-<a href="https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes">Latex pour le rapport finale</a><br/>
-<a href="https://openclassrooms.com/fr/courses/1343806-pygtk/1343942-glade">Glade pour interface graphique facile</a><br/>

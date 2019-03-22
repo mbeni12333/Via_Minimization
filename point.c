@@ -16,12 +16,13 @@ Point* initialize_point(double x, double y, int num_res){
   return temp;
 }
 
-void afficher_point(Point* pt){
-    if(pt == NULL){
-      fprintf(stderr, "point vide Vide !");
+void afficher_point(Point* pt, char* tab=""){
+      if(pt == NULL){
+      fprintf(stderr, "Netlist Vide !");
       return;
     }
   // on affiche tout les points
-  printf("\tPoint (x=%.1f, y=%.1f) : \n",pt->x, pt->y);
-  afficher_cell_segment(pt->Lincid);
+  int i;
+  Printf("%sPoint (x=%.1f, y=%.1f) : \n", pt->x, pt->y);
+  afficher_cell_segment(pt->Lincid, strcat("\t", tab));
 }

@@ -20,7 +20,16 @@ typedef struct segment{
 
 
 
+/**************************************************************
+*                       Fonction de segment                     *  
+**************************************************************/
+
 /*Cette fonction cree un segment avec tout ses parametres*/
 Segment* initialize_segment(int NumRes, int p1, int p2, int HouV);
-void afficher_segment(Segment* seg);
+/*Creation de copie*/
+Segment* copie_segment(Segment* sg);
+/*Afficher une segment*/
+void afficher_segment(Segment* sg);
+
+
 #endif

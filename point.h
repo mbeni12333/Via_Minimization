@@ -15,13 +15,13 @@ typedef struct point{
 
 
 /**************************************************************
-*                       Fonction de point                     *
+*                       Fonction de point                     *  
 **************************************************************/
 
 /*Fonction d'initialisation*/
 Point* initialize_point(double x, double y, int num_res);
 /*Creation de copie*/
-Point* copie_point(Point* pt);
+Point* copie_netlist(Point* pt);
 /*Afficher une netlist*/
 void afficher_point(Point* pt);
 #endif
