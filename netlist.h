@@ -8,11 +8,11 @@
 #include "point.h"
 #include "cell_segment.h"
 #include "reseau.h"
-
-
+#include "SVGwriter.h"
+struct reseau;
 typedef struct netlist {
     int NbRes; /* Nombre de reseaux*/
-    Reseau* *T_Res; /* Tableau pointant sur chaque reseau*/
+    struct reseau* *T_Res; /* Tableau pointant sur chaque reseau*/
 }Netlist;
 
 
@@ -26,8 +26,12 @@ Netlist* initialize_netlist(int NbRes);
 Netlist* read_net_from_file(char* file);
 /*Creation de copie*/
 Netlist* copie_netlist(Netlist* nl);
+/*Liberation de la memoire*/
+//void free_netlist(Netlist* nl);
 /*Afficher une netlist*/
-void afficher_netlist(Netlist* nl);
+void afficher_netlist(Netlist* nl, SVGwriter* svg);
+/*Visualisation Netlist*/
+void visualiser_netlist(Netlist* nl, char* nomFichier);
 
 
 #endif

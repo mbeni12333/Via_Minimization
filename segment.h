@@ -1,10 +1,14 @@
 #ifndef _SEGMENT_H_
 #define _SEGMENT_H_
 
+#include "netlist.h"
 #include "cell_segment.h"
+#include "SVGwriter.h"
+
 /*Chaque segment  est defini par le numero du reseau dont il
 appartient , ainsi que ses 2 extremites, */
 struct cell_segment;
+struct netlist;
 typedef struct segment{
 
     int NumRes; /* Numero du reseau auquel appartient ce segment*/
@@ -20,16 +24,10 @@ typedef struct segment{
 
 
 
-/**************************************************************
-*                       Fonction de segment                     *  
-**************************************************************/
-
 /*Cette fonction cree un segment avec tout ses parametres*/
 Segment* initialize_segment(int NumRes, int p1, int p2, int HouV);
-/*Creation de copie*/
-Segment* copie_segment(Segment* sg);
-/*Afficher une segment*/
-void afficher_segment(Segment* sg);
-
-
+/*Affichage de segment*/
+void afficher_segment(Segment* seg, SVGwriter* svg, struct netlist* nl);
+/*Liberation espace memoire segment;*/
+//void free_segment(Segment* seg);
 #endif

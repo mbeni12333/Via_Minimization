@@ -6,6 +6,8 @@
 
 
 void SVGinit(SVGwriter *svg, char *nom, int sizeX, int sizeY) {
+
+  /*Allocation de l'espace*/
   char filename[100];
 
   strcpy(filename,nom);
@@ -33,7 +35,7 @@ void SVGinit(SVGwriter *svg, char *nom, int sizeX, int sizeY) {
   fprintf(svg->file, " width=\"100%%\" height=\"100%%\"");
   fprintf(svg->file, " viewBox=\"%lf %lf %lf %lf\"", -2.0, -2.0, sizeX+7.0, sizeY+7.0);
   fprintf(svg->file, " preserveAspectRatio=\"yes\">\n");
-  fprintf(svg->file, "<g >\n\n");
+  fprintf(svg->file, "<g>");
 
    svg->lineColor[0]='#';
 }
