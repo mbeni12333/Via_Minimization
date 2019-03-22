@@ -1,6 +1,7 @@
 # Via_Minimization
 Projet d'Algorithmique 2I006
 # DERNIER DELAIS LUNDI 26/03/2019
+```
 typedef Struct AVL{
   Segment* seg;
   int poid_gauche;
@@ -8,7 +9,7 @@ typedef Struct AVL{
   AVL* fils_gauche;
   AVL* fils_droite;
 }AVL;
-
+```
 implementation de la structure d'AVL pour ameliorer la complexité de la fonction de balayage
 
 # Usage
