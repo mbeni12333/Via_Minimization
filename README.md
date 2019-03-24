@@ -31,9 +31,9 @@ Description du probleme + description solutoin
 - [X] structure AVL
 - [ ] Fonction d'ajout
 - [ ] Fonction de suppression
-- [ ] Fonction rotation droite
-- [ ] Fonction rotation gauche
-- [ ] Fonction liberation memoire
+- [X] Fonction rotation droite
+- [X] Fonction rotation gauche
+- [X] Fonction liberation memoire
 - [ ] Fichier de tests validité
 - [ ] Fichier de tests, graph de complexité
 
