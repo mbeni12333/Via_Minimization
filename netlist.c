@@ -1,5 +1,8 @@
 #include "netlist.h"
 
+Netlist* netlist_globale;
+SVGwriter img;
+
 Netlist* initialize_netlist(int NbRes){
   Netlist* temp = (Netlist*)malloc(sizeof(Netlist));
   // s'il y a une erreur
@@ -91,6 +94,7 @@ Netlist* read_net_from_file(char* file){
       ajouter_segment(&T_Pt[p2]->Lincid, current_segment);
     }
   }
+  netlist_globale = netlist;
   return netlist;
 }
 /*Creation de copie*/
@@ -109,7 +113,9 @@ void afficher_netlist(Netlist* nl){
   for(i=0; i<nl->NbRes; i++){
     // on affiche le reseau i (reste a savoir )
     SVGlineRandColor(&img);
+    SVGgroup(&img);
     afficher_reseau(nl->T_Res[i]);
+    SVGgroup_end(&img);
   }
   printf("Fin de l'affichage \n");
 }
@@ -118,8 +124,7 @@ void visualiser_netlist(Netlist* nl, char* nomFichier){
   // tests null
 
   // on initilise un svgwriter
-  SVGwriter svg;
-  SVGinit(&img, nomFichier, 1000, 4000);
+  SVGinit(&img, nomFichier, 50000, 80000);
   /* test ligne
   SVGpoint(&svg, 10, 10);
   SVGpoint(&svg, 10, 400);
@@ -128,7 +133,7 @@ void visualiser_netlist(Netlist* nl, char* nomFichier){
   SVGpoint(&svg, 2000, 30);
   SVGline(&svg, -30, 30, 2000, 30);*/
   afficher_netlist(nl);
-  
+
 
   // on finalise le fichier
   SVGfinalize(&img);

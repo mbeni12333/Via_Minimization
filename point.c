@@ -22,9 +22,9 @@ void afficher_point(Point* pt){
       return;
     }
   // on affiche tout les points
-  printf("\tPoint (x=%.1f, y=%.1f) : \n",pt->x, pt->y);
-  /*if(svg != NULL){
-    SVGpoint(svg, pt->x, pt->y);
-  }*/
+  //printf("\tPoint (x=%.1f, y=%.1f) : \n",pt->x, pt->y);
+  //if(svg != NULL){
+  SVGpoint(&img, pt->x, pt->y);
+  //}
   afficher_cell_segment(pt->Lincid);
 }

@@ -27,7 +27,7 @@ typedef struct segment{
             /* p1 est le point en bas a gauche par rapport a p2*/
 
     int HouV; /* 0 si Horizontal et 1 si Vertical */
-
+    int printed;
     struct cell_segment *Lintersec; /* Liste des segments en intersection */
 
 } Segment;

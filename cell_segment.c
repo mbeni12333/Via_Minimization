@@ -44,12 +44,12 @@ Cell_segment* copie_cell_segment(Cell_segment* cell_seg){return NULL;}
 /*Afficher une netlist*/
 void afficher_cell_segment(Cell_segment* cell_seg){
 
-    printf("\t\tliste:\n\t\t");
+    //printf("\t\tliste:\n\t\t");
     while(cell_seg != NULL){
         afficher_segment(cell_seg->seg);
-        printf("->");
+        //printf("->");
         cell_seg = cell_seg->suiv;
     }
-    printf("NULL\n");
+    //printf("NULL\n");
 
 }
