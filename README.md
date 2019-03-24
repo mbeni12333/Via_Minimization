@@ -29,7 +29,7 @@ Description du probleme + description solutoin
 
 ## ToDO list
 - [X] structure AVL
-- [ ] Fonction d'ajout
+- [X] Fonction d'ajout
 - [ ] Fonction de suppression
 - [X] Fonction rotation droite
 - [X] Fonction rotation gauche
