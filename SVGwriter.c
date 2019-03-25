@@ -5,7 +5,7 @@
 
 
 
-void SVGinit(SVGwriter *svg, char *nom, int sizeX, int sizeY) {
+void SVGinit(SVGwriter *svg, char *nom, int xmin, int ymin, int sizeX, int sizeY) {
 
   /*Allocation de l'espace*/
   char filename[100];
@@ -34,7 +34,7 @@ void SVGinit(SVGwriter *svg, char *nom, int sizeX, int sizeY) {
 
   fprintf(svg->file,"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"");
   fprintf(svg->file, " width=\"100%%\" height=\"100%%\"");
-  //fprintf(svg->file, " viewBox=\"%.f %.f %.f %.f\"", -30000.0, -40000.0, sizeX+7.0, sizeY+7.0);
+  //fprintf(svg->file, " viewBox=\"%d %d %d %d\"", xmin, ymin, sizeX+7, sizeY+7);
   fprintf(svg->file, " preserveAspectRatio=\"yes\">\n");
   fprintf(svg->file, "<script xlink:href=\"svgp.js\"/>\n");
   //fprintf(svg->file, "<defs><circle id=\"c\" cx=\"0.0\" cy=\"0.0\" r=\"3\" stroke=\"#000000\" stroke-width=\"3\" fill=\"#000000\" /></defs>\n");
@@ -64,7 +64,7 @@ void SVGpoint(SVGwriter *svg, double x, double y) {
 
 
 void SVGline(SVGwriter *svg,double xa,double ya,double xb,double yb) {
-  fprintf(svg->file, "<line x1=\"%.f\" y1=\"%.f\" x2=\"%.f\" y2=\"%.f\" />", xa, ya, xb, yb);
+  fprintf(svg->file, "<line x1=\"%.f\" y1=\"%f\" x2=\"%f\" y2=\"%f\" />", xa, ya, xb, yb);
 
 }
 

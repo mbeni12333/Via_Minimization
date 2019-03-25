@@ -1,8 +1,8 @@
 #ifndef _DETECT_INTERSECTION_H_
 #define _DETECT_INTERSECTION_H_
 
-#include "structs"
-
+#include "structs.h"
+#include "netlist.h"
 /*Fonction auxiliere*/
 int intersection(Netlist* nl, Segment *s1, Segment *s2);
 Segment** tableau_segments(Netlist* nl);

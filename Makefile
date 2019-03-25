@@ -17,12 +17,12 @@ VisuNetlist.o: VisuNetlist.c structs.h
 	gcc $(CFLAGS) -c VisuNetlist.c
 tests_elementaires.o: tests_elementaires.c netlist.h
 	gcc $(CFLAGS) -c tests_elementaires.c
-detection_intersection.o: detection_intersection.c detection_intersection.h
-	gcc $(CFLAGS) -c detection_intersection.c
+detect_intersection.o: detect_intersection.c detect_intersection.h
+	gcc $(CFLAGS) -c detect_intersection.c
 # fonction helper
 entree_sortie.o: entree_sortie.c entree_sortie.h
 	gcc $(CFLAGS) -c entree_sortie.c
-	
+
 SVGwriter.o: SVGwriter.c SVGwriter.h
 	gcc $(CFLAGS) -c SVGwriter.c
 
@@ -31,8 +31,8 @@ SVGwriter.o: SVGwriter.c SVGwriter.h
 VisuNetlist: VisuNetlist.o cell_segment.o point.o segment.o reseau.o netlist.o SVGwriter.o entree_sortie.o
 	gcc $(CFLAGS) -o VisuNetlist VisuNetlist.o cell_segment.o point.o segment.o reseau.o netlist.o SVGwriter.o entree_sortie.o
 
-tests_elementaires: tests_elementaires.o cell_segment.o point.o segment.o reseau.o netlist.o  entree_sortie.o
-	gcc $(CFLAGS) -o tests_elemenaites tests_elementaires.o cell_segment.o point.o segment.o reseau.o netlist.o SVGwriter.o entree_sortie.o
+tests_elementaires: tests_elementaires.o cell_segment.o point.o segment.o reseau.o netlist.o  entree_sortie.o detect_intersection.o
+	gcc $(CFLAGS) -o tests_elementaires tests_elementaires.o cell_segment.o point.o segment.o reseau.o netlist.o  entree_sortie.o SVGwriter.o detect_intersection.o
 
 
 clean:

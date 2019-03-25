@@ -32,7 +32,7 @@ typedef struct SVGwriter_struct {
 /* Initialise le struct SVGwriter passe en parametre
       nomfic: nom du fichier html \'a creer
       sizeX, sizeY: taille en pixel de l'image \'a creer */
-void SVGinit(SVGwriter *svg,char *nomfic, int sizeX, int sizeY);
+void SVGinit(SVGwriter *svg,char *nomfic, int xmin, int ymin, int sizeX, int sizeY);
 
 /* Fixe la couleur des lignes pour la suite */
 void SVGlineColor(SVGwriter *svg, char *col);
