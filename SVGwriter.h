@@ -15,11 +15,11 @@
 
 
 typedef struct SVGwriter_struct {
-  
+
   char lineColor[10];  /* Default color value */
   char pointColor[10]; /* Default color value */
   int sizeX, sizeY;    /* Picture size */
-   
+
   FILE *file; /* File stream */
 
   /* Technical value for random color generation */
@@ -28,7 +28,7 @@ typedef struct SVGwriter_struct {
 } SVGwriter;
 
 
-  
+
 /* Initialise le struct SVGwriter passe en parametre
       nomfic: nom du fichier html \'a creer
       sizeX, sizeY: taille en pixel de l'image \'a creer */
@@ -43,12 +43,14 @@ void SVGlineRandColor(SVGwriter *svg);
 /* Fixe la couleur des points pour la suite */
 void SVGpointColor(SVGwriter *svg, char *col);
 
-/* Ecrit un point dans le fichier */ 
+/* Ecrit un point dans le fichier */
 void SVGpoint(SVGwriter *svg, double x, double y);
 
 /*Ecrit un segment dans le fichier */
 void SVGline(SVGwriter *svg, double xa, double ya, double xb, double yb);
-
+/*creer un groupe*/
+void SVGgroup(SVGwriter *svg);
+void SVGgroup_end(SVGwriter *svg);
 /* Ferme le fichier */
 void SVGfinalize(SVGwriter *svg);
 

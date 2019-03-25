@@ -16,15 +16,15 @@ Point* initialize_point(double x, double y, int num_res){
   return temp;
 }
 
-void afficher_point(Point* pt, SVGwriter* svg, Netlist* nl){
+void afficher_point(Point* pt){
     if(pt == NULL){
       fprintf(stderr, "point vide Vide !");
       return;
     }
   // on affiche tout les points
-  printf("\tPoint (x=%.1f, y=%.1f) : \n",pt->x, pt->y);
-  if(svg != NULL){
-    SVGpoint(svg, pt->x, pt->y);
-  }
-  afficher_cell_segment(pt->Lincid, svg, nl);
+  //printf("\tPoint (x=%.1f, y=%.1f) : \n",pt->x, pt->y);
+  //if(svg != NULL){
+  SVGpoint(&img, pt->x, pt->y);
+  //}
+  afficher_cell_segment(pt->Lincid);
 }
