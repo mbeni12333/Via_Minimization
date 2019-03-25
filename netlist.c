@@ -110,7 +110,7 @@ Netlist* read_net_from_file(char* file){
   netlist->xmin = xmin;
   netlist->ymin = ymin;
   netlist->xoffsef = xmax-xmin;
-  netlist->yoffset = ymax - ymin;
+  netlist->yoffset = ymax-ymin;
   netlist->nbSeg = nbSeg;
 
   netlist_globale = netlist;
@@ -146,7 +146,7 @@ void visualiser_netlist(Netlist* nl, char* nomFichier){
   // tests null
 
   // on initilise un svgwriter
-  SVGinit(&img, nomFichier, 50000, 80000);
+  SVGinit(&img, nomFichier, nl->xmin, nl->ymin, nl->xoffsef, nl->yoffset);
   /* test ligne
   SVGpoint(&svg, 10, 10);
   SVGpoint(&svg, 10, 400);

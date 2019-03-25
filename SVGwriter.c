@@ -5,7 +5,7 @@
 
 
 
-void SVGinit(SVGwriter *svg, char *nom, int sizeX, int sizeY) {
+void SVGinit(SVGwriter *svg, char *nom, int xmin, int ymin, int sizeX, int sizeY) {
 
   /*Allocation de l'espace*/
   char filename[100];
@@ -33,7 +33,11 @@ void SVGinit(SVGwriter *svg, char *nom, int sizeX, int sizeY) {
 
   fprintf(svg->file,"<html><body><svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.2\"");
   fprintf(svg->file, " width=\"100%%\" height=\"100%%\"");
+<<<<<<< HEAD
   fprintf(svg->file, " viewBox=\"%lf %lf %lf %lf\"", -2.0, -2.0, sizeX+7.0, sizeY+7.0);
+=======
+  //fprintf(svg->file, " viewBox=\"%d %d %d %d\"", xmin, ymin, sizeX+7, sizeY+7);
+>>>>>>> better
   fprintf(svg->file, " preserveAspectRatio=\"yes\">\n");
   fprintf(svg->file, "<g>");
 
@@ -61,8 +65,13 @@ void SVGpoint(SVGwriter *svg, double x, double y) {
 
 
 void SVGline(SVGwriter *svg,double xa,double ya,double xb,double yb) {
+<<<<<<< HEAD
   fprintf(svg->file, "<line x1=\"%lf\" y1=\"%lf\" x2=\"%lf\" y2=\"%lf\" ", xa, ya, xb, yb);
   fprintf(svg->file, " style=\"stroke:%s;stroke-width:2\"/>\n", svg->lineColor);    
+=======
+  fprintf(svg->file, "<line x1=\"%.f\" y1=\"%f\" x2=\"%f\" y2=\"%f\" />", xa, ya, xb, yb);
+
+>>>>>>> better
 }
 
 
