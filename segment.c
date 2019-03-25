@@ -1,6 +1,5 @@
 #include "segment.h"
-Netlist* netlist_globale;
-SVGwriter img;
+
 Segment* initialize_segment(int NumRes, int p1, int p2, int HouV){
   Segment* temp = (Segment*)malloc(sizeof(Segment));
   // s'il y a une erreur
@@ -15,25 +14,20 @@ Segment* initialize_segment(int NumRes, int p1, int p2, int HouV){
   temp->p2 = p2; // le deuxieme point
   temp->HouV=HouV;// 0 horizontal 1 vertical
   temp->Lintersec = NULL; // il n'y a pas d'intersection pour l'instant
-  temp->printed = 0;
+
   // et finallement on retourene le pointeur
   return temp;
 }
-void afficher_segment(Segment* seg){
-  if(seg->printed){
-    seg->printed = 0;
-    return;
-  }
-  seg->printed=1;
+void afficher_segment(Segment* seg, SVGwriter* svg, Netlist* nl){
   char c = (seg->HouV == 0) ? 'H':'V';
-  //printf("%c", c);
-  /*if(svg != NULL){*/
+  printf("%c(%d,%d)", c, seg->p1, seg->p2);
+  if(svg != NULL){
     double xa, xb, ya, yb;
-    Point** pt = netlist_globale->T_Res[seg->NumRes]->T_Pt;
+    Point** pt = nl->T_Res[seg->NumRes]->T_Pt;
     xa=pt[seg->p1]->x;
     ya=pt[seg->p1]->y;
     xb=pt[seg->p2]->x;
     yb=pt[seg->p2]->y;
-SVGline(&img, xa, ya, xb, yb);
-//}
+    SVGline(svg, xa, ya, xb, yb);
+  }
 }
