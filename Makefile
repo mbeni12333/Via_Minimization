@@ -30,14 +30,11 @@ SVGwriter.o: SVGwriter.c SVGwriter.h
 # les executables
 VisuNetlist: VisuNetlist.o cell_segment.o point.o segment.o reseau.o netlist.o SVGwriter.o entree_sortie.o
 	gcc $(CFLAGS) -o VisuNetlist VisuNetlist.o cell_segment.o point.o segment.o reseau.o netlist.o SVGwriter.o entree_sortie.o
-<<<<<<< HEAD
-tests_elementaires: tests_elementaires.o cell_segment.o point.o segment.o reseau.o netlist.o  entree_sortie.o
-	gcc $(CFLAGS) -o tests_elemenaites tests_elementaires.o cell_segment.o point.o segment.o reseau.o netlist.o SVGwriter.o entree_sortie.o
-=======
+
 
 tests_elementaires: tests_elementaires.o cell_segment.o point.o segment.o reseau.o netlist.o  entree_sortie.o detect_intersection.o
 	gcc $(CFLAGS) -o tests_elementaires tests_elementaires.o cell_segment.o point.o segment.o reseau.o netlist.o  entree_sortie.o SVGwriter.o detect_intersection.o
->>>>>>> better
+
 
 
 clean:
