@@ -23,6 +23,7 @@ Netlist* initialize_netlist(int NbRes){
 
   temp->T_Res = T_Res;
   // mettre case a NULL
+  temp->xmin = temp->ymin = temp->xoffsef = temp->yoffset = 0;
   return temp;
 }
 
@@ -30,7 +31,8 @@ Netlist* initialize_netlist(int NbRes){
 Netlist* read_net_from_file(char* file){
   // on commence par ouvrir le fichier
   FILE* f = fopen(file, "r");
-
+  double xmin, ymin, xmax, ymax; // utile plus tard svg
+  int nbSeg = 0; // utile
   // si le fichier n'existe pas
   if(!f){
     fprintf(f, "Erreur d'ouverture fichier net\n");
@@ -53,7 +55,8 @@ Netlist* read_net_from_file(char* file){
     int NumRes = GetEntier(f);
     int NbPt = GetEntier(f);
     int NbSeg = GetEntier(f);
-
+    //nb total de seg
+    nbSeg+=NbSeg;
 
     // on cree le reseau et on l'ajoute au netlist
     Reseau* current_reseau = initilize_reseau(NumRes, NbPt);
@@ -68,7 +71,17 @@ Netlist* read_net_from_file(char* file){
       int NumPt = GetEntier(f);
       double x = GetEntier(f);
       double y = GetEntier(f);
-
+      if(j!=0){
+        xmin = xmin > x ? x:xmin;
+        ymin = ymin > y ? y:ymin;
+        xmax = xmax < x ? x:xmax;
+        ymax = ymax < y ? y:ymax;
+      }else{
+        xmin = x;
+        ymin = y;
+        xmax = x;
+        ymin = y;
+      }
       // on cree le point et on l'ajoute au reseau
       Point* current_point = initialize_point(x, y, NumRes);
       if(!current_point){
@@ -94,6 +107,12 @@ Netlist* read_net_from_file(char* file){
       ajouter_segment(&T_Pt[p2]->Lincid, current_segment);
     }
   }
+  netlist->xmin = xmin;
+  netlist->ymin = ymin;
+  netlist->xoffsef = xmax-xmin;
+  netlist->yoffset = ymax - ymin;
+  netlist->nbSeg = nbSeg;
+
   netlist_globale = netlist;
   return netlist;
 }
@@ -109,7 +128,9 @@ void afficher_netlist(Netlist* nl){
   }
   // on affiche tout les reseau
   int i;
+
   printf("Affichage de Netlist (%d Reseaux) : \n", nl->NbRes);
+
   for(i=0; i<nl->NbRes; i++){
     // on affiche le reseau i (reste a savoir )
     SVGlineRandColor(&img);
@@ -117,6 +138,7 @@ void afficher_netlist(Netlist* nl){
     afficher_reseau(nl->T_Res[i]);
     SVGgroup_end(&img);
   }
+  printf("Netlist BOX(%f %f %f %f)\n", nl->xmin, nl->ymin, nl->xoffsef, nl->yoffset);
   printf("Fin de l'affichage \n");
 }
 /*Visualisation Netlist*/
