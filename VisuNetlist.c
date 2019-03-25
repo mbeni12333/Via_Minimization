@@ -1,4 +1,5 @@
 #include "netlist.h"
+#include <string.h>
 
 int main(int argc, char** argv){
   // on verifie le format

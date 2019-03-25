@@ -25,7 +25,7 @@ Reseau* initilize_reseau(int NumRes, int NbPt){
   // finallement on retourne le pointeur
   return temp;
 }
-void afficher_reseau(Reseau* res){
+void afficher_reseau(Reseau* res, SVGwriter* svg, Netlist* nl){
   if(res == NULL){
     fprintf(stderr, "Reseau Vide !");
     return;
@@ -34,6 +34,6 @@ void afficher_reseau(Reseau* res){
   printf("Reseau %d : (%d points)\n", res->NumRes, res->NbPt);
   int i;
   for(i=0; i<res->NbPt;i++){
-    afficher_point(res->T_Pt[i]);
+    afficher_point(res->T_Pt[i], svg, nl);
   }
 }

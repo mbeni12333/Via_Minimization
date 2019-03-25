@@ -9,11 +9,11 @@ point.o: point.c point.h cell_segment.h
 	gcc $(CFLAGS) -c point.c
 segment.o: segment.c segment.h cell_segment.h
 	gcc $(CFLAGS) -c segment.c
-reseau.o: reseau.c reseau.h structs.h point.h
+reseau.o: reseau.c reseau.h point.h
 	gcc $(CFLAGS) -c reseau.c
-netlist.o: netlist.c netlist.h structs.h cell_segment.h segment.h
+netlist.o: netlist.c netlist.h
 	gcc $(CFLAGS) -c netlist.c
-VisuNetlist.o: VisuNetlist.c structs.h
+VisuNetlist.o: VisuNetlist.c SVGwriter.h
 	gcc $(CFLAGS) -c VisuNetlist.c
 tests_elementaires.o: tests_elementaires.c netlist.h
 	gcc $(CFLAGS) -c tests_elementaires.c 
@@ -25,9 +25,8 @@ SVGwriter.o: SVGwriter.c SVGwriter.h
 
 
 # les executables
-VisuNetlist: VisuNetlist.o cell_segment.o point.o segment.o reseau.o netlist.o SVGwriter.o entree_sortie.o 
+VisuNetlist: VisuNetlist.o cell_segment.o point.o segment.o reseau.o netlist.o SVGwriter.o entree_sortie.o
 	gcc $(CFLAGS) -o VisuNetlist VisuNetlist.o cell_segment.o point.o segment.o reseau.o netlist.o SVGwriter.o entree_sortie.o
-
 tests_elementaires: tests_elementaires.o cell_segment.o point.o segment.o reseau.o netlist.o  entree_sortie.o
 	gcc $(CFLAGS) -o tests_elemenaites tests_elementaires.o cell_segment.o point.o segment.o reseau.o netlist.o SVGwriter.o entree_sortie.o
 

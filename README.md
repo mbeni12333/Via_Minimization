@@ -52,12 +52,12 @@ Description du probleme + description solutoin
 - [ ] Commencer a ecrire le rapport **
 - [ ] Expliquer le probleme plus clairement***
 - [X] fonctions de base (affichage, ajout, suppresion, liberation, initialisation)**
-- [X] Imprementaion de l'algorithme de detection d'intersection**
+- [ ] Imprementaion de l'algorithme de detection d'intersection**
 - [ ] Detection de cycle impair***
-- [X] Visualiser les circuits avec un fichier svg**
+- [ ] Visualiser les circuits avec un fichier svg**
 - [ ] mesure performance individuel des fonctions haut niveau (netlist , et les algo principeau)
 - [X] Collecte de ressource sur les different algorithme à utiliser*
-- [ ] Ammelioration de la page web
+- [ ] interface graphique GTK
 - [ ] implementation des algos plus interessant (Genetic, Integer linear prog, heuristic)
 
 

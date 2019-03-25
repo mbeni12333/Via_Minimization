@@ -19,7 +19,7 @@ int main(int argc, char** argv){
     Netlist* netlist = read_net_from_file(file);
 
     // affichage
-    afficher_netlist(netlist);
+    afficher_netlist(netlist, NULL);
 
     // suppresion de l'ESPACE
 
