@@ -11,15 +11,15 @@ void SVGinit(SVGwriter *svg, char *nom, int xmin, int ymin, int sizeX, int sizeY
   char filename[100];
 
   strcpy(filename,nom);
-  strcat(filename,".html");
-  
+  strcat(filename,".svg");
+
   svg->file=fopen(filename, "w");
 
   if (svg->file==NULL) {
     printf("Unable to create %s\n",nom);
     exit(1);
   }
-  
+
   strcpy(svg->lineColor, Red);
   strcpy(svg->pointColor, Black);
 
@@ -31,15 +31,14 @@ void SVGinit(SVGwriter *svg, char *nom, int xmin, int ymin, int sizeX, int sizeY
   svg->gencol[8]='8';svg->gencol[9]='9';svg->gencol[10]='A';svg->gencol[11]='B';
   svg->gencol[12]='C';svg->gencol[13]='D';svg->gencol[14]='E';svg->gencol[15]='F';
 
-  fprintf(svg->file,"<html><body><svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.2\"");
+
+  fprintf(svg->file,"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"");
   fprintf(svg->file, " width=\"100%%\" height=\"100%%\"");
-<<<<<<< HEAD
-  fprintf(svg->file, " viewBox=\"%lf %lf %lf %lf\"", -2.0, -2.0, sizeX+7.0, sizeY+7.0);
-=======
   //fprintf(svg->file, " viewBox=\"%d %d %d %d\"", xmin, ymin, sizeX+7, sizeY+7);
->>>>>>> better
   fprintf(svg->file, " preserveAspectRatio=\"yes\">\n");
-  fprintf(svg->file, "<g>");
+  fprintf(svg->file, "<script xlink:href=\"svgp.js\"/>\n");
+  //fprintf(svg->file, "<defs><circle id=\"c\" cx=\"0.0\" cy=\"0.0\" r=\"3\" stroke=\"#000000\" stroke-width=\"3\" fill=\"#000000\" /></defs>\n");
+  fprintf(svg->file, "<style>line{stroke-width:10;stroke-linecap:round ;}</style><g id=\"viewport\">");
 
    svg->lineColor[0]='#';
 }
@@ -60,23 +59,24 @@ void SVGpointColor(SVGwriter *svg, char *col) {
 }
 
 void SVGpoint(SVGwriter *svg, double x, double y) {
-  fprintf(svg->file,"<circle cx=\"%lf\" cy=\"%lf\" r=\"2\" stroke=\"%s\" stroke-width=\"1\" fill=\"%s\" />\n",x,y,svg->pointColor,svg->pointColor);
+  //fprintf(svg->file,"<use x=\"%.f\" y=\"%.f\" xlink:href=\"#c\"/>\n",x,y);
 }
 
 
 void SVGline(SVGwriter *svg,double xa,double ya,double xb,double yb) {
-<<<<<<< HEAD
-  fprintf(svg->file, "<line x1=\"%lf\" y1=\"%lf\" x2=\"%lf\" y2=\"%lf\" ", xa, ya, xb, yb);
-  fprintf(svg->file, " style=\"stroke:%s;stroke-width:2\"/>\n", svg->lineColor);    
-=======
   fprintf(svg->file, "<line x1=\"%.f\" y1=\"%f\" x2=\"%f\" y2=\"%f\" />", xa, ya, xb, yb);
 
->>>>>>> better
 }
 
+void SVGgroup(SVGwriter *svg){
+  fprintf(svg->file, "<g style=\"stroke:%s;\" >\n", svg->lineColor);;
+}
+void SVGgroup_end(SVGwriter *svg){
+  fprintf(svg->file, "</g>\n");
+}
 
 void SVGfinalize(SVGwriter *svg) {
-  fprintf(svg->file, "\n\n</g></svg></body></html>\n");
+  fprintf(svg->file, "\n\n</g></svg>\n");
   fclose(svg->file);
   svg->file=NULL;
 }

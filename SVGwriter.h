@@ -48,7 +48,9 @@ void SVGpoint(SVGwriter *svg, double x, double y);
 
 /*Ecrit un segment dans le fichier */
 void SVGline(SVGwriter *svg, double xa, double ya, double xb, double yb);
-
+/*creer un groupe*/
+void SVGgroup(SVGwriter *svg);
+void SVGgroup_end(SVGwriter *svg);
 /* Ferme le fichier */
 void SVGfinalize(SVGwriter *svg);
 

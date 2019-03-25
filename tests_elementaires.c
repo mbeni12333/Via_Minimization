@@ -18,13 +18,8 @@ int main(int argc, char** argv){
     //printf("Netlist : %d\n", netlist->NbRes);
     //afficher_netlist(netlist);
     // affichage
-<<<<<<< HEAD
-    afficher_netlist(netlist, NULL);
-
-=======
     //afficher_netlist(netlist);
     clock_t t = clock();
->>>>>>> better
     // suppresion de l'ESPACE
     int intersect = intersect_naif(netlist);
     time = (double)(clock() - t)/CLOCKS_PER_SEC;
