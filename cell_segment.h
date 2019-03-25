@@ -23,11 +23,13 @@ typedef struct cell_segment{
 *                       Fonction de Cell_segment              *
 **************************************************************/
 /*Fonction d'initialisation d'une cellule*/
-Cell_segment* initialisation(struct segment* seg);
+Cell_segment* initialisation(Segment* seg);
 /*Fonction ajouter_segment*/
-int ajouter_segment(Cell_segment** cell_seg, struct segment* addme);
+int ajouter_segment(Cell_segment** cell_seg, Segment* addme);
 /*Fonction qui supprime un segment*/
-int supprime_segment(struct segment** suppme);
+int supprime_segment(Segment** suppme);
+/*nbElem*/
+int nbElem(Cell_segment* cell_seg);
 /*Fonction pour verifier si liste vide*/
 int cell_seg_vide(Cell_segment* cell_seg);
 /*Creation de copie*/

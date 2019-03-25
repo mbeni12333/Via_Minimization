@@ -16,10 +16,13 @@ netlist.o: netlist.c netlist.h
 VisuNetlist.o: VisuNetlist.c SVGwriter.h
 	gcc $(CFLAGS) -c VisuNetlist.c
 tests_elementaires.o: tests_elementaires.c netlist.h
-	gcc $(CFLAGS) -c tests_elementaires.c 
+	gcc $(CFLAGS) -c tests_elementaires.c
+detection_intersection.o: detection_intersection.c detection_intersection.h
+	gcc $(CFLAGS) -c detection_intersection.c
 # fonction helper
 entree_sortie.o: entree_sortie.c entree_sortie.h
 	gcc $(CFLAGS) -c entree_sortie.c
+	
 SVGwriter.o: SVGwriter.c SVGwriter.h
 	gcc $(CFLAGS) -c SVGwriter.c
 

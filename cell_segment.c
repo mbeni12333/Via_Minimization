@@ -41,6 +41,15 @@ int cell_seg_vide(Cell_segment* cell_seg){
 }
 /*Creation de copie*/
 Cell_segment* copie_cell_segment(Cell_segment* cell_seg){return NULL;}
+/*nbElem*/
+int nbElem(Cell_segment* cell_seg){
+  int cpt = 0;
+  while(cell_seg != NULL){
+    cell_seg = cell_seg->suiv;
+    cpt++;
+  }
+  return cpt;
+}
 /*Afficher une netlist*/
 void afficher_cell_segment(Cell_segment* cell_seg, SVGwriter* svg, Netlist* nl){
 
