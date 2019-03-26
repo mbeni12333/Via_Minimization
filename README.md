@@ -53,9 +53,17 @@ Description du probleme + description solutoin
 - [ ] Expliquer le probleme plus clairement***
 - [X] fonctions de base (affichage, ajout, suppresion, liberation, initialisation)**
 - [X] Imprementaion de l'algorithme de detection d'intersection**
+  - [ ] Structure d'échéancier
+  - [ ] Implementation de listes doublemenet chainé
+  - [ ] Implementation de la methode de balayage
+  - [ ] Implementation de l'Algorithme de Tri 
+  - [ ] Structure d'Extrémité
 - [ ] Detection de cycle impair***
 - [X] Visualiser les circuits avec un fichier svg**
 - [ ] mesure performance individuel des fonctions haut niveau (netlist , et les algo principeau)
+  - [ ] Fichier test de clonage de reseau
+  - [ ] Fichier test complexité fonctions individuel
+  - [ ] Performance Balayge VS naiif
 - [X] Collecte de ressource sur les different algorithme à utiliser*
 - [ ] Ammelioration de la page web
 - [ ] implementation des algos plus interessant (Genetic, Integer linear prog, heuristic)
