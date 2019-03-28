@@ -8,6 +8,10 @@ AVL* Ajout_feuille(Segment * seg, Netlist *n){
         fprintf(stderr, "Erreur Allocation AVL \n");
         return NULL;
     }
+    if(seg->HouV != 0){
+        printf("Ce segment n'est pas horizontal...");
+        return NULL;
+    }
     nouv->seg = seg;
     nouv->fils_gauche = NULL;
     nouv->fils_droite = NULL; 
