@@ -30,7 +30,7 @@ Description du probleme + description solutoin
 ## ToDO list
 - [X] structure AVL
 - [X] Fonction d'ajout
-- [ ] Fonction de suppression
+- [X] Fonction de suppression
 - [X] Fonction rotation droite
 - [X] Fonction rotation gauche
 - [X] Fonction liberation memoire
