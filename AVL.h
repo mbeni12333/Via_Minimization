@@ -16,24 +16,26 @@ struct netlist;
 typedef struct AVL{
   Segment* seg;
   double clef;  
-  int hauteur;
+  int poid;
   AVL* fils_gauche;
   AVL* fils_droite;
 }AVL;
 
 /*Fonction d'initialisation de la structure*/
 AVL* Ajout_feuille(Segment * seg, Netlist *n);
-/*Calcule de la hauteur d'un arbre*/
-int hauteur(*AVL ab);
 /*Ajout d'un segment dans l'arbre AVL*/
-void ajout_segment_AVL(AVL* ab, Netlist * n);
+void Ajout_segment_AVL(AVL* ab, Netlist * n);
 /*Suppression d'un segment dans l'arbre AVL*/
-void suppression_segment_AVL(AVL* ab, Netlist* n);
+void Suppression_segment_AVL(AVL* ab, Netlist* n);
 /*Liberation de l'espace alloué pour l'AVL*/
 void free_AVL(AVL *ab);
 //max
 int max(int a,int b);
+//min
+int min(int a,int b);
 //Rotation Droite
 void Rotation_droite(AVL *ab);
 //Rotation Gauche 
 void Rotation_gauche(AVL *ab);
+//Enlever le minimum
+AVL* enleve_min(AVL *ab);
