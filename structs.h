@@ -60,8 +60,22 @@ typedef struct netlist {
     int nbSeg;
     double xmin, ymin, xoffsef, yoffset; // svg
 }Netlist;
+/*Extremite d'un segment*/
+typedef struct extremite{
+  double x; // ordronné du points
+  int VouGouD; // 0 si V, 1 si H 2
+  Segment* seg; // pointeur vers le segments
+  int NumPt; //num du point0......
+}Extremite;
 
-/*Variable Globales utile*/
+/*Structure d'echeancier*/
+typedef struct echeancier{
+  Extremite** T_Ext;
+  int n;
+}Echeancier;
+
+
+/*Variable Globales utile*e/
 
 /*Netlist global qui sera utilise tout le temps sauf si precisé*/
 extern Netlist* netlist_globale;
