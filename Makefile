@@ -1,4 +1,4 @@
-EXEC= VisuNetlist tests_elementaires
+EXEC= VisuNetlist tests_elementaires test_echeancier
 all: $(EXEC)
 CFLAGS= -Wall -g
 
@@ -17,6 +17,10 @@ VisuNetlist.o: VisuNetlist.c structs.h
 	gcc $(CFLAGS) -c VisuNetlist.c
 tests_elementaires.o: tests_elementaires.c netlist.h
 	gcc $(CFLAGS) -c tests_elementaires.c
+tests_echeacier.o: tests_echeanciers.c netlist.h 
+	gcc $(CFLAGS) -c tests_elementaires.c
+echeancier.o: echeancier.c echeancier.h
+	gcc $(CFLAGS) -c echeancier.c
 detect_intersection.o: detect_intersection.c detect_intersection.h
 	gcc $(CFLAGS) -c detect_intersection.c
 # fonction helper
@@ -25,7 +29,8 @@ entree_sortie.o: entree_sortie.c entree_sortie.h
 
 SVGwriter.o: SVGwriter.c SVGwriter.h
 	gcc $(CFLAGS) -c SVGwriter.c
-
+AVL.o: AVL.c AVL.h
+	gcc $(CFLAGS) -c AVL.c
 
 # les executables
 VisuNetlist: VisuNetlist.o cell_segment.o point.o segment.o reseau.o netlist.o SVGwriter.o entree_sortie.o
@@ -34,7 +39,8 @@ VisuNetlist: VisuNetlist.o cell_segment.o point.o segment.o reseau.o netlist.o S
 tests_elementaires: tests_elementaires.o cell_segment.o point.o segment.o reseau.o netlist.o  entree_sortie.o detect_intersection.o
 	gcc $(CFLAGS) -o tests_elementaires tests_elementaires.o cell_segment.o point.o segment.o reseau.o netlist.o  entree_sortie.o SVGwriter.o detect_intersection.o
 
-
+test_echeancier: test_echeancier.o cell_segment.o point.o segment.o reseau.o netlist.o  entree_sortie.o echeancier.o AVL.o detect_intersection.o
+	gcc $(CFLAGS) -o test_echeancier test_echeancier.o cell_segment.o point.o segment.o reseau.o netlist.o  entree_sortie.o SVGwriter.o echeancier.o AVL.o detect_intersection.o
 clean:
 	rm -rf *.o
 	rm $(EXEC)

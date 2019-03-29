@@ -7,7 +7,7 @@
 #include "segment.h"
 #include "cell_segment.h"
 #include "reseau.h"
-
+#include "entree_sortie.h"
 
 /***********************************************************
 * Ensemble des fonction netlist pour parser les benchmarks *
@@ -17,6 +17,9 @@
 Netlist* initialize_netlist(int NbRes);
 /*Cette fonction permet de lire un reseau*/
 Netlist* read_net_from_file(char* file);
+/*Tableau de segments*/
+Segment** tableau_segments(Netlist* nl);
+int nbSeg(Netlist* nl);
 /*Creation de copie*/
 Netlist* copie_netlist(Netlist* nl);
 /*Liberation de la memoire*/

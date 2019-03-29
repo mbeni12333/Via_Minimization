@@ -3,7 +3,7 @@
 #ifndef _RESEAU_H_
 #define _RESEAU_H_
 
-
+#include "netlist.h"
 
 /***********************************************************
 * Ensemble des fonction Reseaux                            *

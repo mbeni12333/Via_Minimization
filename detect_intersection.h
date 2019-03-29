@@ -5,12 +5,11 @@
 #include "netlist.h"
 /*Fonction auxiliere*/
 int intersection(Netlist* nl, Segment *s1, Segment *s2);
-Segment** tableau_segments(Netlist* nl);
-int nbSeg(Netlist* nl);
 /*Algorithms*/
 int intersect_naif(Netlist* nl);
 
-
+int min(int x, int y);
+int max(int x, int y);
 
 /*Fonction standard*/
 void sauvgarder_intersections(Netlist* nl,char* nomfichier);

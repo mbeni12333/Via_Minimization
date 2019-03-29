@@ -25,7 +25,7 @@ void afficher_segment(Segment* seg){
     return;
   }
   seg->printed=1;
-  char c = (seg->HouV == 0) ? 'H':'V';
+  //char c = (seg->HouV == 0) ? 'H':'V';
   //printf("%c", c);
   /*if(svg != NULL){*/
     double xa, xb, ya, yb;

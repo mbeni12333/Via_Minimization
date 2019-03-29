@@ -116,6 +116,56 @@ Netlist* read_net_from_file(char* file){
   netlist_globale = netlist;
   return netlist;
 }
+/*Tableau des segments*/
+Segment** tableau_segments(Netlist* nl){
+  if(!nl)return NULL;
+  int nbseg =  nbSeg(nl);
+
+  Segment** T_Seg = (Segment**)malloc(sizeof(Segment*)*nbseg);
+  if(!T_Seg){
+    fprintf(stderr, "Erreur allocation tableau de segment");
+    return NULL;
+  }
+  // sinon si tout va bien, on parcours tout le netist et on remplit le tableau_segments
+  int i = 0;
+  int j = 0;
+  int cpt = 0;
+  Reseau** T_Res = nl->T_Res;
+  Reseau* current_reseau;
+  for(i=0; i < nl->NbRes; i++){
+    // on fixe le reseau actuelle
+    current_reseau = T_Res[i];
+    Point** T_Pt = current_reseau->T_Pt;
+    // on parcours tout les points
+    for(j=0; j<current_reseau->NbPt; j++){
+      // on ajoute l'element dans le tableau a la case
+      // compteur
+      Point* current_point = T_Pt[j];
+
+      Cell_segment* current_liste = current_point->Lincid;
+      Segment* current_seg;
+      // on parcour la liste des segments
+      while(current_liste != NULL){
+        // on ajoute l'element dans le tabeleau et on incremente l'indice
+        // si le segment n'est pas deja present
+        current_seg = current_liste->seg;
+
+        if(!current_seg->printed){
+          T_Seg[cpt++] = current_seg;
+          current_seg->printed = 1;
+        }
+        //printf("Cpt = %d\n", cpt);
+        current_liste = current_liste->suiv;
+      }
+    }
+
+  //printf("NbSeg = %d\n", nbseg);
+  }
+  return T_Seg;
+}
+int nbSeg(Netlist* nl){
+  return nl->nbSeg;
+}
 /*Creation de copie*/
 Netlist* copie_netlist(Netlist* nl){
   return NULL;

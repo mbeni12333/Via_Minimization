@@ -70,12 +70,12 @@ typedef struct extremite{
 
 /*Structure d'echeancier*/
 typedef struct echeancier{
-  Extremite** T_Ext;
-  int n;
+  Extremite* ext;
+  struct echeancier *suiv;
 }Echeancier;
 
 
-/*Variable Globales utile*e/
+/*Variable Globales utile*/
 
 /*Netlist global qui sera utilise tout le temps sauf si precisé*/
 extern Netlist* netlist_globale;
