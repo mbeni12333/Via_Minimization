@@ -6,7 +6,7 @@
 #include "cell_segment.h"
 #include "netlist.h"
 #include "segment.h"
-
+#include "detect_intersection.h"
 /**************************************************************
 *                       Fonction de echeancier              *
 **************************************************************/

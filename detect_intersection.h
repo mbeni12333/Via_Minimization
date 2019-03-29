@@ -8,8 +8,8 @@ int intersection(Netlist* nl, Segment *s1, Segment *s2);
 /*Algorithms*/
 int intersect_naif(Netlist* nl);
 
-int min(int x, int y);
-int max(int x, int y);
+double min(double x, double y);
+double max(double x, double y);
 
 /*Fonction standard*/
 void sauvgarder_intersections(Netlist* nl,char* nomfichier);

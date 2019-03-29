@@ -24,7 +24,7 @@ int main(int argc, char** argv){
     //Echeancier* E = creer_echeancier(netlist);
     int cpt = intersect_baleyage(netlist);
     time = (double)(clock() - t)/CLOCKS_PER_SEC;
-    //afficher_echeancier(E);
+
     printf("Time needed = %.5f s, intersections found = %d\n", time, cpt);
     //free_echeancier(E);
     return 0;

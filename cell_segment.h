@@ -24,7 +24,7 @@ Cell_segment* copie_cell_segment(Cell_segment* cell_seg);
 void ajouter_segment_trie(Netlist* nl, Cell_segment** cell_seg, Segment *seg);
 void afficher_cell_segment(Cell_segment* cell_seg);
 Cell_segment* prem_segment_apres(Netlist* nl, Cell_segment* cell_seg, double y);
-Segment * AuDessus(Netlist* nl,  Cell_segment* cell_seg, double y);
+Cell_segment * AuDessus(Netlist* nl,  Cell_segment* cell_seg, double y);
 /*Liberation espace cell_segment*/
 //void free_cell_segment(Cell_segment* cell_seg);
 #endif

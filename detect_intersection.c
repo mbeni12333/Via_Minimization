@@ -1,10 +1,20 @@
 #include "detect_intersection.h"
 /*Fonction auxiliere*/
-int min(int x, int y){
-  return x < y ? x:y;
+double min(double x, double y){
+  //return x < y ? x:y;
+  if(x < y){
+    return x;
+  }else{
+    return y;
+  }
 }
-int max(int x, int y){
-  return x > y ? x:y;
+double max(double x, double y){
+  //return x > y ? x:y;
+  if(x > y){
+    return x;
+  }else{
+    return y;
+  }
 }
 int intersection(Netlist* nl, Segment *s1, Segment *s2){
   // rien a faire

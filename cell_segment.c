@@ -36,7 +36,9 @@ int ajouter_segment(Cell_segment** cell_seg, Segment* addme){
 void ajouter_segment_trie(Netlist* nl, Cell_segment** cell_seg, Segment *seg){
   
   Cell_segment * cell = initialize_cell_segment(seg);
+
   if(!cell){
+      //printf("CATASTROPHE\n");
       return;
   }
 
@@ -45,17 +47,22 @@ void ajouter_segment_trie(Netlist* nl, Cell_segment** cell_seg, Segment *seg){
   int y = T_Res[seg->NumRes]->T_Pt[seg->p1]->y;
 
   Cell_segment * current = *cell_seg;
- 
+  if(!seg){
+      //printf("ZIOAHFHZIEF\n");
+  }
   if(!*cell_seg){
+      //printf("BIZARRE\n");
       *cell_seg = cell;
+      return;
   }else{
-    if (T_Res[(*cell_seg)->seg->NumRes]->T_Pt[(*cell_seg)->seg->p1]->y>=y){
+      // sinon on insere au premier elem
+    if (T_Res[(*cell_seg)->seg->NumRes]->T_Pt[(*cell_seg)->seg->p1]->y >= y){
         cell->suiv = *cell_seg;
         *cell_seg = cell;
     }else{
         current = *cell_seg;
    
-        while(!current->suiv && T_Res[current->suiv->seg->NumRes]->T_Pt[current->suiv->seg->p1]->y <= y){
+        while(current->suiv && (T_Res[current->suiv->seg->NumRes]->T_Pt[current->suiv->seg->p1]->y <= y)){
             current = current->suiv;
     }
    
@@ -86,7 +93,7 @@ int supprime_segment(Cell_segment** cell_seg, Segment* suppme){
         Cell_segment* temp = current->suiv;
         if(!temp) return 0;
 
-        current = current->suiv->suiv;
+        current->suiv = current->suiv->suiv;
         free(temp);
         
         return 1;
@@ -115,10 +122,10 @@ void afficher_cell_segment(Cell_segment* cell_seg){
     //printf("\t\tliste:\n\t\t");
     while(cell_seg != NULL){
         afficher_segment(cell_seg->seg);
-        //printf("->");
+        printf("->");
         cell_seg = cell_seg->suiv;
     }
-    //printf("NULL\n");
+    printf("NULL\n");
 
 }
 /*Methodes a voir*/
@@ -126,8 +133,9 @@ Cell_segment* prem_segment_apres(Netlist* nl, Cell_segment* cell_seg, double y){
   Reseau** T_Res = nl->T_Res;
   
   while(cell_seg){
-
-      if(T_Res[cell_seg->seg->NumRes]->T_Pt[cell_seg->seg->p1]->y >= y)
+      int y1 = T_Res[cell_seg->seg->NumRes]->T_Pt[cell_seg->seg->p1]->y;
+      //int y2 = T_Res[cell_seg->seg->NumRes]->T_Pt[cell_seg->seg->p1];
+      if( y1 >= y)
         return cell_seg;
 
       cell_seg = cell_seg->suiv;
@@ -136,22 +144,23 @@ Cell_segment* prem_segment_apres(Netlist* nl, Cell_segment* cell_seg, double y){
 }
 
 
-Segment * AuDessus(Netlist* nl,Cell_segment* cell_seg, double y){
+Cell_segment * AuDessus(Netlist* nl,Cell_segment* cell_seg, double y){
    //tab des reseau
   Reseau **T_Res = nl->T_Res; 
     // y  de seg
   //int y = T_Res[seg->NumRes]->T_Pt[seg->p1]->y;
     
     
-  //while(!cell_seg){
-    if(!cell_seg || !cell_seg->suiv){
-        return NULL;
-    }
-    if(T_Res[cell_seg->suiv->seg->NumRes]->T_Pt[cell_seg->suiv->seg->p1]->y >= y){
-        return NULL;
-    }else{
-        return cell_seg->suiv->seg;
-    }
-}
+  while(!cell_seg){
+        if(!cell_seg || !cell_seg->suiv){
+            return NULL;
+        }
+        if(T_Res[cell_seg->suiv->seg->NumRes]->T_Pt[cell_seg->suiv->seg->p1]->y >= y){
+            return NULL;
+        }else{
+            return cell_seg->suiv;
+        }
 
+   }
+}
 
