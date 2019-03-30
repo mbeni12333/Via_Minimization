@@ -20,10 +20,10 @@ Segment* initialize_segment(int NumRes, int p1, int p2, int HouV){
   return temp;
 }
 void afficher_segment(Segment* seg){
-  /*if(seg->printed){
+  if(seg->printed){
     seg->printed = 0;
     return;
-  }*/
+  }
   seg->printed=1;
   //char c = (seg->HouV == 0) ? 'H':'V';
   //printf("%c", c);

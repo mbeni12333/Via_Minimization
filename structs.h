@@ -73,6 +73,14 @@ typedef struct echeancier{
   Extremite* ext;
   struct echeancier *suiv;
 }Echeancier;
+/*Structure d'AVL*/
+typedef struct AVL{
+  Segment* seg;
+  double clef;
+  int poid;
+  struct AVL* fils_gauche;
+  struct AVL* fils_droite;
+}AVL;
 
 
 /*Variable Globales utile*/

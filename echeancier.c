@@ -12,7 +12,7 @@ Extremite* init_extremite(double x, int VouGouD, Segment* seg, int NumPt){
         ext->VouGouD = VouGouD;
         ext->seg = seg;
         ext->NumPt = NumPt;
-        
+
         return ext;
     }
 }
@@ -101,19 +101,125 @@ int compare_extremite(Extremite* exta, Extremite* extb){
                 return -1;
             }
         }else{
-            return 0;
+            //printf("It actually happened, 2 ext same x not vertical\n");
+            //printf("x1 = %.f x2 = %.f v1 = %d v2 = %d\n", exta->x, extb->x, exta->VouGouD, extb->VouGouD);
+            //afficher_segment(exta->seg);
+            //printf(" and ");
+            //afficher_segment(exta->seg);
+            if(exta->VouGouD < extb->VouGouD)
+              return 1;
+            else if(exta->VouGouD > extb->VouGouD)
+              return -1;
+            else return 0;
+            ;
         }
     }
 }
-Echeancier* merge(Echeancier* a, Echeancier* b){
-    /*Merge de deux listes trié*/
+Echeancier *mergeUtil(Echeancier *h1, Echeancier *h2){
+    // if only one node in first list
+    // simply point its head to second list
+
+    if (!h1->suiv){
+
+        h1->suiv = h2;
+        return h1;
+    }
+
+    // Initialize current and next pointers of
+    // both lists
+    Echeancier *curr1 = h1, *next1 = h1->suiv;
+    Echeancier *curr2 = h2, *next2 = h2;
+
+    while (next1 && next2){
+        // if curr2 lies in between curr1 and next1
+        // then do curr1->curr2->next1
+        int cond1 = compare_extremite(curr1->ext, curr2->ext);
+        int cond2 = compare_extremite(curr2->ext, next1->ext);
+
+        if (cond1 != -1 && cond2 != -1){
+
+            next2 = curr2->suiv;
+            curr1->suiv = curr2;
+            curr2->suiv = next1;
+
+            // now let curr1 and curr2 to point
+            // to their immediate next pointers
+            curr1 = curr2;
+            curr2 = next2;
+        }else{
+            // if more nodes in first list
+            if (next1->suiv){
+
+                next1 = next1->suiv;
+                curr1 = curr1->suiv;
+            }
+
+            // else point the last node of first list
+            // to the remaining nodes of second list
+            else{
+
+                next1->suiv = curr2;
+                return h1;
+            }
+        }
+    }
+
+
+    /*while(next1 && next2){
+      int cond1 = compare_extremite(next2, next1);
+
+      while(cond1 == 0 || cond1 == 1){
+        next2 = next2->suiv;
+        cond1 = compare_extremite(next2, next1);
+      }
+      if(!next2->suiv){
+
+        curr1->suiv = curr2;
+        next2->suiv = next1;
+
+        return h1;
+      }
+
+      curr1 = next1;
+      curr2 = next2;
+
+      next1 = curr1->suiv;
+      next2 = curr2->suiv;
+    }
+    if(next1){
+
+    }
+    if(next2){
+
+    }*/
+    return h1;
+}
+
+// Merges two given lists in-place. This function
+// mainly compares head nodes and calls mergeUtil()
+Echeancier *merge(Echeancier *h1, Echeancier *h2){
+
+    if (!h1)
+        return h2;
+    if (!h2)
+        return h1;
+
+    // start with the linked list
+    // whose head data is the least
+    if (compare_extremite(h1->ext,h2->ext) == 1)
+        return mergeUtil(h1, h2);
+    else
+        return mergeUtil(h2, h1);
+}
+/*Echeancier* merge(Echeancier* a, Echeancier* b){
+    /*Merge de deux listes trié
     Echeancier* head;
     // cas de base
     if(!a){
         return b;
     }else if(!b){
         return a;
-    }        
+    }
 
     // cas generale
     if(compare_extremite(a->ext, b->ext) == 1){
@@ -125,7 +231,7 @@ Echeancier* merge(Echeancier* a, Echeancier* b){
     }
 
     return head;
-}
+}*/
 void merge_sort(Echeancier** E){
     /*Tri en n log n*/
     if(*E == NULL || (*E)->suiv == NULL){
@@ -175,9 +281,9 @@ Echeancier* creer_echeancier(Netlist* nl, int *cpt){
     /*On a plus besoin de T*/
     free(T);
     /*On tri l'echeancier*/
-
+    //afficher_echeancier(E);
     merge_sort(&E);
-    
+
     /*Finallement on le retourne*/
     return E;
 }
@@ -199,7 +305,7 @@ void afficher_echeancier(Echeancier* E){
         Echeancier* current = E;
         printf("Affichage de l'echeancier (ordre croissant attendu\n");
         while(current){
-            printf("%.f %d ->\n", current->ext->x, current->ext->VouGouD);
+            printf("%.f(%d) ->", current->ext->x, current->ext->VouGouD);
             current = current->suiv;
         }
         printf("\nFin de l'affichage\n");
@@ -213,53 +319,54 @@ int intersect_baleyage(Netlist* nl){
     int cpt = 0;
     int cpt_intersect = 0;
     Echeancier* E = creer_echeancier(nl, &cpt);
+    //afficher_echeancier(E);
     // T est une liste
     Cell_segment* cell_seg = NULL;
     //Cell_segment* tail = NULL;
     Echeancier* current_echeancier = E;
     Extremite* ext;
-    
-    //printf("CPT = %d\n", cpt);
+
+    //printf("%d ", cpt);
     int i = 0;
     for(i=0; i<=cpt; i++){
         // pour chaque Extremite
         ext = current_echeancier->ext;
-        printf("Current extremite VouGouD = %d NumRes = %d y = ", ext->VouGouD, ext->seg->NumRes);
-        afficher_segment(current_echeancier->ext->seg);
-        printf("\n");
-        printf("%.f ", ext->x);
-        afficher_cell_segment(cell_seg);
+        //printf("Current extremite VouGouD = %d NumRes = %d y = ", ext->VouGouD, ext->seg->NumRes);
+        //afficher_segment(current_echeancier->ext->seg);
+        //printf("\n");
+        //printf("%.f ", ext->x);
+        //afficher_cell_segment(cell_seg);
         switch(ext->VouGouD){
-            case 1: ;/*printf("Ajout !\n");*/ ajouter_segment_trie(nl, &cell_seg, ext->seg);
+            case 1: ;/*printf("Ajout !\n")*/; ajouter_segment_trie(nl, &cell_seg, ext->seg);
                      //tail = cell_seg;
                 /*}else{
                     //ajouter_segment(&tail->suiv, ext->seg);
                     //tail = tail->suiv;
                 }*/
                 break;
-            case 2: ;/*printf("Suppression !");*/supprime_segment(&cell_seg, ext->seg);
+            case 2: ;/*printf("Suppression !")*/;supprime_segment(&cell_seg, ext->seg);
                 break;
             case 0:; Segment* v = ext->seg;
                      Reseau* r = nl->T_Res[v->NumRes];
                      Point * p1 = r->T_Pt[v->p1],
                            * p2 = r->T_Pt[v->p2];
-                    printf("x1=%.f y1=%.f x2=%.f y2=%.f\n", p1->x, p1->y, p2->x, p2->y);
+                    //printf("x1=%.f y1=%.f x2=%.f y2=%.f\n", p1->x, p1->y, p2->x, p2->y);
                     // les y du seg vertical
                     double y1,y2;
                     y1 = min(p1->y, p2->y);
                     y2 = max(p1->y, p2->y);
-                    printf("Liste actuelle: (y1 = %.f y2= %.f)\n", y1, y2);
-                    afficher_cell_segment(cell_seg);
-                    printf("\n");
-                    Cell_segment* cell_h = prem_segment_apres(nl, cell_seg, y1); 
-                    if(cell_h != NULL){                   
+                    //printf("Liste actuelle: (y1 = %.f y2= %.f)\n", y1, y2);
+                    //afficher_cell_segment(cell_seg);
+                    //printf("\n");
+                    Cell_segment* cell_h = prem_segment_apres(nl, cell_seg, y1);
+                    if(cell_h != NULL){
                         Segment* h = cell_h->seg;
                         while(cell_h && nl->T_Res[h->NumRes]->T_Pt[h->p1]->y <= y2){
                             //printf("HEY intersect ? \n");
                             if(h->NumRes != v->NumRes){
                                 //printf("OUI : ");
-                               // afficher_segment(h);
-                               // printf("\n");
+                                //afficher_segment(h);
+                                //printf("\n");
                                 ajouter_segment(&v->Lintersec, h);
                                 ajouter_segment(&h->Lintersec, v);
                                 cpt_intersect++;
@@ -288,8 +395,8 @@ int intersect_baleyage(Netlist* nl){
 //afficher_echeancier(E);
 return cpt_intersect;
 }
-/*
-int intersect_baleyage_avl(Netlist* nl){
+
+/*int intersect_baleyage_avl(Netlist* nl){
     // cree l'echeancier
     int cpt = 0;
     int cpt_intersect = 0;
@@ -298,7 +405,7 @@ int intersect_baleyage_avl(Netlist* nl){
     AVL* cell_seg = NULL;
     Echeancier* current_echeancier = E;
     Extremite* ext;
-    
+
     //printf("CPT = %d\n", cpt);
     int i = 0;
     for(i=0; i<cpt; i++){
@@ -308,7 +415,7 @@ int intersect_baleyage_avl(Netlist* nl){
         switch(ext->VouGouD){
             case 1: ;Ajout_segment_AVL(&cell_seg, ext->seg, nl);
                 break;
-            case 2: ;supprime_segment(&cell_seg, ext->seg, nl);
+            case 2: ;supprime_segment_AVL(&cell_seg, ext->seg, nl);
                 break;
             case 0:; Segment* v = ext->seg;
                      Reseau* r = nl->T_Res[v->NumRes];
@@ -318,9 +425,9 @@ int intersect_baleyage_avl(Netlist* nl){
                     // les y du seg vertical
                     int y1 = min(p1->y, p2->y),
                         y2 = max(p1->y, p2->y);
-                    
-                    Cell_segment* cell_h = prem_segment_apres(nl, cell_seg, y1); 
-                    if(cell_h != NULL){                   
+
+                    AVL* cell_h = prem_segment_apres_AVL(nl, cell_seg, y1);
+                    if(cell_h != NULL){
                         Segment* h = cell_h->seg;
                         while(!h && nl->T_Res[h->NumRes]->T_Pt[h->p1]->y <= y2){
                             if(h->NumRes != v->NumRes){

@@ -6,6 +6,7 @@
 #include<stdlib.h>
 #include<stdio.h>
 #include"detect_intersection.h"
+
 #include"structs.h"
 #include "segment.h"
 #include "SVGwriter.h"
@@ -13,15 +14,7 @@
 
 /*Structure AVL qui contient l'ensemble des informations
 dans un arbre binaire de recherche AVL*/
-struct segment;
-struct netlist;
-typedef struct AVL{
-  Segment* seg;
-  double clef;  
-  int poid;
-  struct AVL* fils_gauche;
-  struct AVL* fils_droite;
-}AVL;
+
 
 /*Fonction d'initialisation de la structure*/
 AVL* Ajout_feuille(Segment * seg, Netlist *n);
@@ -33,7 +26,7 @@ void Suppression_segment_AVL(AVL **ab, Segment* s , Netlist* n);
 void free_AVL(AVL *ab);
 //Rotation Droite
 void Rotation_droite(AVL **ab);
-//Rotation Gauche 
+//Rotation Gauche
 void Rotation_gauche(AVL **ab);
 //Enlever le minimum
 AVL* enleve_min(AVL *ab);
