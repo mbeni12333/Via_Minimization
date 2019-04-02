@@ -35,6 +35,6 @@ void afficher_segment(Segment* seg){
     xb=pt[seg->p2]->x;
     yb=pt[seg->p2]->y;
     printf("%.f(%d)", ya, seg->NumRes);
-//SVGline(&img, xa, ya, xb, yb);
+ SVGline(&img, xa, ya, xb, yb);
 //}
 }

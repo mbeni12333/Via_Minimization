@@ -183,10 +183,10 @@ void afficher_netlist(Netlist* nl){
 
   for(i=0; i<nl->NbRes; i++){
     // on affiche le reseau i (reste a savoir )
-    //SVGlineRandColor(&img);
-    //SVGgroup(&img);
+    SVGlineRandColor(&img);
+    SVGgroup(&img);
     afficher_reseau(nl->T_Res[i]);
-    //SVGgroup_end(&img);
+    SVGgroup_end(&img);
   }
   printf("Netlist BOX(%f %f %f %f)\n", nl->xmin, nl->ymin, nl->xoffsef, nl->yoffset);
   printf("Fin de l'affichage \n");

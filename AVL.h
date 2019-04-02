@@ -30,6 +30,6 @@ void Rotation_droite(AVL **ab);
 void Rotation_gauche(AVL **ab);
 //Enlever le minimum
 AVL* enleve_min(AVL *ab);
-
+void afficher_AVL(AVL* a);
 void equilibrer(AVL **ab);
 #endif
