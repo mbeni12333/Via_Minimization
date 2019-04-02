@@ -53,11 +53,11 @@ Description du probleme + description solutoin
 - [ ] Expliquer le probleme plus clairement***
 - [X] fonctions de base (affichage, ajout, suppresion, liberation, initialisation)**
 - [X] Imprementaion de l'algorithme de detection d'intersection**
-  - [ ] Structure d'échéancier
-  - [ ] Implementation de listes doublemenet chainé
-  - [ ] Implementation de la methode de balayage
-  - [ ] Implementation de l'Algorithme de Tri 
-  - [ ] Structure d'Extrémité
+  - [X] Structure d'échéancier
+  - [X] Implementation de listes doublemenet chainé
+  - [X] Implementation de la methode de balayage
+  - [X] Implementation de l'Algorithme de Tri 
+  - [X] Structure d'Extrémité
 - [ ] Detection de cycle impair***
 - [X] Visualiser les circuits avec un fichier svg**
 - [ ] mesure performance individuel des fonctions haut niveau (netlist , et les algo principeau)
