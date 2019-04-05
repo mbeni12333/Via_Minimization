@@ -23,13 +23,18 @@ void Ajout_segment_AVL(AVL** ab, Segment* s, Netlist * n);
 /*Suppression d'un segment dans l'arbre AVL*/
 void Suppression_segment_AVL(AVL **ab, Segment* s , Netlist* n);
 /*Liberation de l'espace alloué pour l'AVL*/
-void free_AVL(AVL *ab);
+void free_AVL(AVL **ab);
 //Rotation Droite
 void Rotation_droite(AVL **ab);
 //Rotation Gauche
 void Rotation_gauche(AVL **ab);
-//Enlever le minimum
-AVL* enleve_min(AVL *ab);
+//recupre le minimum d'un arbre
+AVL* recup_min(AVL **ab);
+//Hauteur de l'arbre/noeud
+int hauteur(AVL* ab);
+//Difference de hauteur entre deux sous arbres
+int getDiff(AVL *ab);
+
 void afficher_AVL(AVL* a);
 void equilibrer(AVL **ab);
 #endif
