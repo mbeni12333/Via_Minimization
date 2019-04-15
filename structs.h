@@ -57,7 +57,7 @@ typedef struct reseau{
 typedef struct netlist {
     int NbRes; /* Nombre de reseaux*/
     Reseau* *T_Res; /* Tableau pointant sur chaque reseau*/
-    int nbSeg;
+    int nbSeg, nbPt;
     double xmin, ymin, xoffsef, yoffset; // svg
 }Netlist;
 /*Extremite d'un segment*/
@@ -81,7 +81,18 @@ typedef struct AVL{
   struct AVL* fils_gauche;
   struct AVL* fils_droite;
 }AVL;
-
+typedef struct noeud_graph_point{
+  // decorator
+  // counter + stuff
+}NG_Point;
+typedef struct noeud_graph_seg{
+  // decorator
+  // counter +  stuff
+}NG_seg;
+typedef struct graph{
+  Point** T_Pt;
+  Segment** T_Seg;
+}Graph;
 
 /*Variable Globales utile*/
 

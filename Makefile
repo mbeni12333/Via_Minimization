@@ -17,10 +17,12 @@ VisuNetlist.o: VisuNetlist.c structs.h
 	gcc $(CFLAGS) -c VisuNetlist.c
 tests_elementaires.o: tests_elementaires.c netlist.h
 	gcc $(CFLAGS) -c tests_elementaires.c
-tests_echeacier.o: tests_echeanciers.c netlist.h 
+tests_echeacier.o: tests_echeanciers.c netlist.h
 	gcc $(CFLAGS) -c tests_elementaires.c
 echeancier.o: echeancier.c echeancier.h
 	gcc $(CFLAGS) -c echeancier.c
+graph.o: graph.c graph.h
+	gcc $(CFLAGS) -c graph.c
 detect_intersection.o: detect_intersection.c detect_intersection.h
 	gcc $(CFLAGS) -c detect_intersection.c
 # fonction helper
@@ -34,8 +36,8 @@ AVL.o: AVL.c AVL.h
 test_arbre.o: test_arbre.c
 	gcc $(CFLAGS) -c test_arbre.c
 # les executables
-VisuNetlist: VisuNetlist.o cell_segment.o point.o segment.o reseau.o netlist.o SVGwriter.o entree_sortie.o
-	gcc $(CFLAGS) -o VisuNetlist VisuNetlist.o cell_segment.o point.o segment.o reseau.o netlist.o SVGwriter.o entree_sortie.o
+VisuNetlist: VisuNetlist.o cell_segment.o point.o segment.o reseau.o netlist.o SVGwriter.o entree_sortie.o graph.o
+	gcc $(CFLAGS) -o VisuNetlist VisuNetlist.o cell_segment.o point.o segment.o reseau.o netlist.o SVGwriter.o entree_sortie.o graph.o
 
 tests_elementaires: tests_elementaires.o cell_segment.o point.o segment.o reseau.o netlist.o  entree_sortie.o detect_intersection.o
 	gcc $(CFLAGS) -o tests_elementaires tests_elementaires.o cell_segment.o point.o segment.o reseau.o netlist.o  entree_sortie.o SVGwriter.o detect_intersection.o

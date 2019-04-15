@@ -20,13 +20,14 @@ Segment* initialize_segment(int NumRes, int p1, int p2, int HouV){
   return temp;
 }
 void afficher_segment(Segment* seg){
-  if(seg->printed){
+  if(seg->printed>=2){
+    printf("WTF\n");
     seg->printed = 0;
     return;
   }
   seg->printed=1;
   //char c = (seg->HouV == 0) ? 'H':'V';
-  //printf("%c", c);
+  // printf("%c", c);
   /*if(svg != NULL){*/
     double xa, xb, ya, yb;
     Point** pt = netlist_globale->T_Res[seg->NumRes]->T_Pt;
@@ -34,7 +35,7 @@ void afficher_segment(Segment* seg){
     ya=pt[seg->p1]->y;
     xb=pt[seg->p2]->x;
     yb=pt[seg->p2]->y;
-    printf("%.f(%d)", ya, seg->NumRes);
+    //printf("%.f(%d)", ya, seg->NumRes);
  SVGline(&img, xa, ya, xb, yb);
 //}
 }

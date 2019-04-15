@@ -19,6 +19,7 @@ Netlist* initialize_netlist(int NbRes);
 Netlist* read_net_from_file(char* file);
 /*Tableau de segments*/
 Segment** tableau_segments(Netlist* nl);
+Point** tableau_points(Netlist* nl);
 int nbSeg(Netlist* nl);
 /*Creation de copie*/
 Netlist* copie_netlist(Netlist* nl);

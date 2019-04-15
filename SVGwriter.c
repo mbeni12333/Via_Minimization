@@ -64,7 +64,7 @@ void SVGpoint(SVGwriter *svg, double x, double y) {
 
 
 void SVGline(SVGwriter *svg,double xa,double ya,double xb,double yb) {
-  fprintf(svg->file, "<line x1=\"%.f\" y1=\"%f\" x2=\"%f\" y2=\"%f\" />", xa, ya, xb, yb);
+  fprintf(svg->file, "<line x1=\"%.f\" y1=\"%.f\" x2=\"%.f\" y2=\"%.f\" />\n", xa, ya, xb, yb);
 
 }
 

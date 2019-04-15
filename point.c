@@ -26,6 +26,6 @@ void afficher_point(Point* pt){
   //if(svg != NULL){
   //SVGpoint(&img, pt->x, pt->y);
   //}
-  
-  afficher_cell_segment(pt->Lincid);
+
+  //afficher_cell_segment(pt->Lincid);
 }

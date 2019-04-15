@@ -24,6 +24,8 @@ Netlist* initialize_netlist(int NbRes){
   temp->T_Res = T_Res;
   // mettre case a NULL
   temp->xmin = temp->ymin = temp->xoffsef = temp->yoffset = 0;
+  temp->nbSeg = 0;
+  temp->nbPt = 0;
   return temp;
 }
 
@@ -33,6 +35,7 @@ Netlist* read_net_from_file(char* file){
   FILE* f = fopen(file, "r");
   double xmin, ymin, xmax, ymax; // utile plus tard svg
   int nbSeg = 0; // utile
+  int nbPt = 0;
   // si le fichier n'existe pas
   if(!f){
     fprintf(f, "Erreur d'ouverture fichier net\n");
@@ -57,7 +60,7 @@ Netlist* read_net_from_file(char* file){
     int NbSeg = GetEntier(f);
     //nb total de seg
     nbSeg+=NbSeg;
-
+    nbPt+=NbPt;
     // on cree le reseau et on l'ajoute au netlist
     Reseau* current_reseau = initilize_reseau(NumRes, NbPt);
     if(!current_reseau){
@@ -112,7 +115,7 @@ Netlist* read_net_from_file(char* file){
   netlist->xoffsef = xmax-xmin;
   netlist->yoffset = ymax-ymin;
   netlist->nbSeg = nbSeg;
-
+  netlist->nbPt = nbPt;
   netlist_globale = netlist;
   return netlist;
 }
@@ -163,6 +166,31 @@ Segment** tableau_segments(Netlist* nl){
   }
   return T_Seg;
 }
+Point** tableau_points(Netlist* nl){
+  if(!nl){
+    fprintf(stderr, "Erreur Netlsit Vide\n");
+    return NULL;
+  }
+  int i;
+  // allocation du tab
+  Point** T_Pt = (Point**)malloc(sizeof(Point*)*nl->nbPt);
+  if(!T_Pt){
+    fprintf(stderr, "Erreur allocation tableau points\n");
+    return NULL;
+  }
+  Point** temp = T_Pt;
+  // aucune Erreur
+  Reseau** T_Res = nl->T_Res;
+  for(i=0; i<nl->NbRes;i++){
+    memcpy(temp, T_Res[i]->T_Pt, T_Res[i]->NbPt*sizeof(Point*));
+    temp += T_Res[i]->NbPt;
+  }
+
+  /*for(i=0; i<nl->nbPt; i++){
+    afficher_point(T_Pt[i]);
+  }*/
+  return T_Pt;
+}
 int nbSeg(Netlist* nl){
   return nl->nbSeg;
 }
@@ -185,7 +213,7 @@ void afficher_netlist(Netlist* nl){
     // on affiche le reseau i (reste a savoir )
     SVGlineRandColor(&img);
     SVGgroup(&img);
-    afficher_reseau(nl->T_Res[i]);
+    //afficher_reseau(nl->T_Res[i]);
     SVGgroup_end(&img);
   }
   printf("Netlist BOX(%f %f %f %f)\n", nl->xmin, nl->ymin, nl->xoffsef, nl->yoffset);
