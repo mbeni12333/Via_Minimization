@@ -77,7 +77,7 @@ typedef struct echeancier{
 typedef struct AVL{
   Segment* seg;
   double clef;
-  int poid;
+  int hauteur;
   struct AVL* fils_gauche;
   struct AVL* fils_droite;
 }AVL;

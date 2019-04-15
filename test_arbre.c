@@ -24,13 +24,23 @@ int main(int argc , char** argv){
 
 
     for(i=0; i<netlist->nbSeg; ++i){
+      if(!T_Seg[i]->HouV){
         Ajout_segment_AVL(&Head, T_Seg[i], netlist);
         printf("Segment %d ajouté\n", i);
+      }
     }
-    afficher_AVL(Head);
-    printf("\n");
+    /*while(Head->fils_gauche){
+      //afficher_AVL(Head);
+      //printf("\n");
+      Suppression_segment_AVL(&Head, Head->seg, netlist);
+      afficher_AVL(Head);
+      printf("\n");
+    }*/
     Suppression_segment_AVL(&Head, Head->seg, netlist);
     afficher_AVL(Head);
     printf("\n");
+
+    
+
     return 0;
 }
