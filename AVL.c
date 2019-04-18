@@ -113,7 +113,7 @@ void Suppression_segment_AVL(AVL **ab, Segment* s , Netlist* n){
     /*if(*ab == NULL)
       return; //Cas ou il n'y a qu'un noeud dans l'arbre*/
     if((*ab)->clef == y){
-      if((*ab)->fils_gauche  && (*ab)->fils_droite ){
+      if(!(*ab)->fils_gauche  || !(*ab)->fils_droite ){
           AVL* tmp = (*ab)->fils_gauche ? (*ab)->fils_gauche: (*ab)->fils_droite;
           /*if((*ab)->fils_gauche){
               tmp = (*ab)->fils_gauche;
@@ -139,7 +139,9 @@ void Suppression_segment_AVL(AVL **ab, Segment* s , Netlist* n){
           //On recupere le minimum du sous arbre de droite
           AVL* pointeur_min = recup_min(&(*ab)->fils_droite);
           AVL* racine = *ab;
-
+          if(!pointeur_min){
+              printf("WTF MAN\n");
+          }
           // on met le min dans la position de la racine
           pointeur_min->fils_gauche = racine->fils_gauche;
           pointeur_min->fils_droite = racine->fils_droite;
@@ -159,8 +161,7 @@ void Suppression_segment_AVL(AVL **ab, Segment* s , Netlist* n){
     }else
           Suppression_segment_AVL(&((*ab)->fils_droite),s,n);
     */
-    //Mise a jour de la hauteur
-    (*ab)->hauteur = 1+max(hauteur((*ab)->fils_gauche),hauteur((*ab)->fils_droite));
+
     //Verification de l'equilibre de l'arbre
     diff = getDiff(*ab);
     if (diff == 2){
@@ -174,6 +175,8 @@ void Suppression_segment_AVL(AVL **ab, Segment* s , Netlist* n){
         }
         Rotation_gauche(ab);
     }
+    //Mise a jour de la hauteur, inutile
+    //(*ab)->hauteur = 1+max(hauteur((*ab)->fils_gauche),hauteur((*ab)->fils_droite));
 }
 //recherche du minimum d'un arbre
 AVL* recup_min(AVL** ab){
@@ -185,9 +188,15 @@ AVL* recup_min(AVL** ab){
         min = *ab;
         *ab = (*ab)->fils_droite;
         // deconnecter min
+        min->fils_droite = NULL;
+        min->fils_gauche = NULL;
         return min;
     }
+    
     AVL* tmp = recup_min(&(*ab)->fils_gauche);
+    if(!tmp){
+        printf("WTFFFFUUFFFF '-' \n");
+    }
     int diff = getDiff(*ab);
 
 
@@ -203,6 +212,8 @@ AVL* recup_min(AVL** ab){
         }
         Rotation_gauche(ab);
     }
+    //(*ab)->hauteur = 1+max(hauteur((*ab)->fils_gauche),hauteur((*ab)->fils_droite));, inutile
+    // mise a jour des hauteurs
     return  tmp;
 
 }
@@ -214,8 +225,9 @@ void afficher_AVL(AVL* a){
     if(!a){
         return;
     }
+    
     afficher_AVL(a->fils_gauche);
-    printf("%d ", getDiff(a));
+    printf("%.f ", a->clef);
     afficher_AVL(a->fils_droite);
 }
 
@@ -233,4 +245,10 @@ void free_AVL(AVL **ab){
     free(*ab);
     *ab = NULL;
 
+}
+AVL* prem_segment_avl(AVL* a, double y1, double y2){
+    return NULL;   
+}
+Cell_segment* avl2list(AVL* a){
+    return NULL;
 }

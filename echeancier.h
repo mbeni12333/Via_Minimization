@@ -7,6 +7,7 @@
 #include "netlist.h"
 #include "segment.h"
 #include "detect_intersection.h"
+#include "AVL.h"
 /**************************************************************
 *                       Fonction de echeancier              *
 **************************************************************/

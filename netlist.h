@@ -19,14 +19,22 @@ Netlist* initialize_netlist(int NbRes);
 Netlist* read_net_from_file(char* file);
 /*Tableau de segments*/
 Segment** tableau_segments(Netlist* nl);
+/*Tableau de points*/
 Point** tableau_points(Netlist* nl);
+/*Nombre de segment de la netlist*/
 int nbSeg(Netlist* nl);
 /*Creation de copie*/
 Netlist* copie_netlist(Netlist* nl);
 /*Liberation de la memoire*/
 void free_netlist(Netlist* nl);
+/*Enregistrer netlist dans un fichier.net*/
+void sauvegarder_netlsit(Netlist* nl);
 /*Afficher une netlist*/
 void afficher_netlist(Netlist* nl);
+/*Enregister les intersesction dans un fichier .init*/
+void sauvegarder_intersections(Netlist* nl, char* nomFichier);
+/*Charger les intersections*/
+void charger_intersections(Netlist* nl, char* nomFichier);
 /*Visualisation Netlist*/
 void visualiser_netlist(Netlist* nl, char* nomFichier);
 

@@ -212,7 +212,7 @@ Echeancier *merge(Echeancier *h1, Echeancier *h2){
         return mergeUtil(h2, h1);
 }
 /*Echeancier* merge(Echeancier* a, Echeancier* b){
-    /*Merge de deux listes trié
+    Merge de deux listes trié
     Echeancier* head;
     // cas de base
     if(!a){
@@ -396,7 +396,7 @@ int intersect_baleyage(Netlist* nl){
 return cpt_intersect;
 }
 
-/*int intersect_baleyage_avl(Netlist* nl){
+int intersect_baleyage_avl(Netlist* nl){
     // cree l'echeancier
     int cpt = 0;
     int cpt_intersect = 0;
@@ -411,11 +411,12 @@ return cpt_intersect;
     for(i=0; i<cpt; i++){
         // pour chaque Extremite
         ext = current_echeancier->ext;
-
+        printf("\nkrha rani hna \n");
+        afficher_AVL(cell_seg);
         switch(ext->VouGouD){
             case 1: ;Ajout_segment_AVL(&cell_seg, ext->seg, nl);
                 break;
-            case 2: ;supprime_segment_AVL(&cell_seg, ext->seg, nl);
+            case 2: ;Suppression_segment_AVL(&cell_seg, ext->seg, nl);printf("Hey i'm deleting\n");
                 break;
             case 0:; Segment* v = ext->seg;
                      Reseau* r = nl->T_Res[v->NumRes];
@@ -426,18 +427,21 @@ return cpt_intersect;
                     int y1 = min(p1->y, p2->y),
                         y2 = max(p1->y, p2->y);
 
-                    AVL* cell_h = prem_segment_apres_AVL(nl, cell_seg, y1);
-                    if(cell_h != NULL){
-                        Segment* h = cell_h->seg;
-                        while(!h && nl->T_Res[h->NumRes]->T_Pt[h->p1]->y <= y2){
-                            if(h->NumRes != v->NumRes){
-                                ajouter_segment(&v->Lintersec, h);
-                                ajouter_segment(&h->Lintersec, v);
+                    AVL* avl_h = prem_segment_avl(cell_seg, y1, y2); // a faire en minirecursif
+                    Cell_segment* cell_h = avl2list(avl_h);
+                    Cell_segment* current = cell_h;
+                    // tant que la liste n'est pas vide
+                     while(current){
+                            if(cell_h->seg->NumRes != v->NumRes){
+                                ajouter_segment(&v->Lintersec, current->seg);
+                                ajouter_segment(&(current->seg)->Lintersec, v);
                                 cpt_intersect++;
                             }
-                            h = AuDessus(nl, cell_h, y2);
-                        }
+                            //h = AuDessus(nl, cell_h, y2);
+                            current = current->suiv; 
                     }
+                        // faut liberer espace liste
+                    
                 break;
             default:
                 fprintf(stderr, "EREUUUUUUUUUUURRRR !!! \n");
@@ -448,4 +452,4 @@ return cpt_intersect;
     }
 
 return cpt_intersect;
-}*/
+}

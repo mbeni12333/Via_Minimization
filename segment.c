@@ -16,6 +16,7 @@ Segment* initialize_segment(int NumRes, int p1, int p2, int HouV){
   temp->HouV=HouV;// 0 horizontal 1 vertical
   temp->Lintersec = NULL; // il n'y a pas d'intersection pour l'instant
   temp->printed = 0;
+  temp->affectation = -1;
   // et finallement on retourene le pointeur
   return temp;
 }

@@ -34,7 +34,12 @@ AVL* recup_min(AVL **ab);
 int hauteur(AVL* ab);
 //Difference de hauteur entre deux sous arbres
 int getDiff(AVL *ab);
-
+// recuperer premeir elem > y1 < y2
+AVL* prem_segment_avl(AVL* a, double y1, double y2);
+Cell_segment* avl2list(AVL* a);
+// convert avl to cell segment
+// affichage
 void afficher_AVL(AVL* a);
+// fonction qui sert a rien
 void equilibrer(AVL **ab);
 #endif

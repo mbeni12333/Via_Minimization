@@ -37,7 +37,7 @@ void SVGinit(SVGwriter *svg, char *nom, int xmin, int ymin, int sizeX, int sizeY
   //fprintf(svg->file, " viewBox=\"%d %d %d %d\"", xmin, ymin, sizeX+7, sizeY+7);
   fprintf(svg->file, " preserveAspectRatio=\"yes\">\n");
   fprintf(svg->file, "<script xlink:href=\"svgp.js\"/>\n");
-  //fprintf(svg->file, "<defs><circle id=\"c\" cx=\"0.0\" cy=\"0.0\" r=\"3\" stroke=\"#000000\" stroke-width=\"3\" fill=\"#000000\" /></defs>\n");
+  fprintf(svg->file, "<defs><circle id=\"c\" cx=\"0.0\" cy=\"0.0\" r=\"3\" stroke=\"#000000\" stroke-width=\"3\" fill=\"#000000\" /></defs>\n");
   fprintf(svg->file, "<style>line{stroke-width:10;stroke-linecap:round ;}</style><g id=\"viewport\">");
 
    svg->lineColor[0]='#';
@@ -59,13 +59,12 @@ void SVGpointColor(SVGwriter *svg, char *col) {
 }
 
 void SVGpoint(SVGwriter *svg, double x, double y) {
-  //fprintf(svg->file,"<use x=\"%.f\" y=\"%.f\" xlink:href=\"#c\"/>\n",x,y);
+  fprintf(svg->file,"<use x=\"%.f\" y=\"%.f\" xlink:href=\"#c\"/>\n",x,y);
 }
 
 
 void SVGline(SVGwriter *svg,double xa,double ya,double xb,double yb) {
   fprintf(svg->file, "<line x1=\"%.f\" y1=\"%.f\" x2=\"%.f\" y2=\"%.f\" />\n", xa, ya, xb, yb);
-
 }
 
 void SVGgroup(SVGwriter *svg){

@@ -29,13 +29,15 @@ int main(int argc , char** argv){
         printf("Segment %d ajouté\n", i);
       }
     }
-    /*while(Head->fils_gauche){
+    while(Head->fils_gauche){
       //afficher_AVL(Head);
       //printf("\n");
       Suppression_segment_AVL(&Head, Head->seg, netlist);
       afficher_AVL(Head);
-      printf("\n");
-    }*/
+      printf("\n\n");
+    }
+
+
     Suppression_segment_AVL(&Head, Head->seg, netlist);
     afficher_AVL(Head);
     printf("\n");

@@ -194,6 +194,18 @@ Point** tableau_points(Netlist* nl){
 int nbSeg(Netlist* nl){
   return nl->nbSeg;
 }
+/*Enregistrer netlist dans un fichier.net*/
+void sauvegarder_netlsit(Netlist* nl){
+  
+}
+/*Enregister les intersesction dans un fichier .init*/
+void sauvegarder_intersections(Netlist* nl, char* nomFichier){
+  
+}
+/*Charger les intersections*/
+void charger_intersections(Netlist* nl, char* nomFichier){
+
+}
 /*Creation de copie*/
 Netlist* copie_netlist(Netlist* nl){
   return NULL;
@@ -213,7 +225,7 @@ void afficher_netlist(Netlist* nl){
     // on affiche le reseau i (reste a savoir )
     SVGlineRandColor(&img);
     SVGgroup(&img);
-    //afficher_reseau(nl->T_Res[i]);
+    afficher_reseau(nl->T_Res[i]);
     SVGgroup_end(&img);
   }
   printf("Netlist BOX(%f %f %f %f)\n", nl->xmin, nl->ymin, nl->xoffsef, nl->yoffset);
