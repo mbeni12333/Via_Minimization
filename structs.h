@@ -50,6 +50,7 @@ typedef struct reseau{
 
     int  NumRes; /* Numero du reseau = Indice dans le tableau T_Res */
     int NbPt;  /* Nombre de points de ce reseau */
+    int NbSeg;
     Point* *T_Pt;  /* Tableau de pointeurs sur chaque point de ce reseau */
 
 }Reseau;
