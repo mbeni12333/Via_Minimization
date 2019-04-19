@@ -36,8 +36,6 @@ Netlist* read_net_from_file(char* file){
   double xmin, ymin, xmax, ymax; // utile plus tard svg
   int nbSeg = 0; // utile
   int nbPt = 0;
-  int numPt = 0;//utile
-  int numSg = 0;//utile
   // si le fichier n'existe pas
   if(!f){
     fprintf(f, "Erreur d'ouverture fichier net\n");
@@ -88,7 +86,7 @@ Netlist* read_net_from_file(char* file){
         ymin = y;
       }
       // on cree le point et on l'ajoute au reseau
-      Point* current_point = initialize_point(x, y, NumRes, numPt++);
+      Point* current_point = initialize_point(x, y, NumRes);
       if(!current_point){
         return NULL;
       }
@@ -103,10 +101,7 @@ Netlist* read_net_from_file(char* file){
 
       int HouV = T_Pt[p1]->x == T_Pt[p2]->x;
       // on cree le segment
-
-      Segment* current_segment =  initialize_segment(NumRes , p1, p2, HouV, numSg);
-
-      numSg++;
+      Segment* current_segment =  initialize_segment(NumRes , p1, p2, HouV);
       if(!current_segment){
         return NULL;
       }
@@ -125,7 +120,7 @@ Netlist* read_net_from_file(char* file){
   return netlist;
 }
 /*Tableau des segments*/
-Segment** tableau_segments(Netlist* nl, int reverse){
+Segment** tableau_segments(Netlist* nl){
   if(!nl)return NULL;
   int nbseg =  nbSeg(nl);
 
@@ -158,12 +153,7 @@ Segment** tableau_segments(Netlist* nl, int reverse){
         // si le segment n'est pas deja present
         current_seg = current_liste->seg;
 
-        if(reverse && current_seg->printed){
-          //printf("euuh .. HELLO !\n" );
-          T_Seg[cpt++] = current_seg;
-          current_seg->printed = 0;
-        }else if (!reverse && !current_seg->printed){
-          //printf("euuh .. HELLO !\n" );
+        if(!current_seg->printed){
           T_Seg[cpt++] = current_seg;
           current_seg->printed = 1;
         }
@@ -206,11 +196,11 @@ int nbSeg(Netlist* nl){
 }
 /*Enregistrer netlist dans un fichier.net*/
 void sauvegarder_netlsit(Netlist* nl){
-
+  
 }
 /*Enregister les intersesction dans un fichier .init*/
 void sauvegarder_intersections(Netlist* nl, char* nomFichier){
-
+  
 }
 /*Charger les intersections*/
 void charger_intersections(Netlist* nl, char* nomFichier){

@@ -1,4 +1,4 @@
-EXEC= VisuNetlist tests_elementaires test_echeancier test_arbre test_graph
+EXEC= VisuNetlist tests_elementaires test_echeancier test_arbre
 all: $(EXEC)
 CFLAGS= -Wall -g
 
@@ -25,8 +25,6 @@ graph.o: graph.c graph.h
 	gcc $(CFLAGS) -c graph.c
 detect_intersection.o: detect_intersection.c detect_intersection.h
 	gcc $(CFLAGS) -c detect_intersection.c
-test_graph.o: test_graph.c
-	gcc $(CFLAGS) -c test_graph.c
 # fonction helper
 entree_sortie.o: entree_sortie.c entree_sortie.h
 	gcc $(CFLAGS) -c entree_sortie.c
@@ -47,8 +45,6 @@ test_arbre: test_arbre.o cell_segment.o point.o segment.o reseau.o netlist.o  en
 	gcc $(CFLAGS) -o test_arbre test_arbre.o cell_segment.o point.o segment.o reseau.o netlist.o  entree_sortie.o SVGwriter.o detect_intersection.o AVL.o
 test_echeancier: test_echeancier.o cell_segment.o point.o segment.o reseau.o netlist.o  entree_sortie.o echeancier.o AVL.o detect_intersection.o
 	gcc $(CFLAGS) -o test_echeancier test_echeancier.o cell_segment.o point.o segment.o reseau.o netlist.o  entree_sortie.o SVGwriter.o echeancier.o AVL.o detect_intersection.o
-test_graph: test_graph.o cell_segment.o point.o segment.o reseau.o netlist.o  entree_sortie.o echeancier.o AVL.o detect_intersection.o graph.o
-	gcc $(CFLAGS) -o test_graph test_graph.o cell_segment.o point.o segment.o reseau.o netlist.o  entree_sortie.o SVGwriter.o echeancier.o AVL.o detect_intersection.o graph.o
 clean:
 	rm -rf *.o
 	rm $(EXEC)

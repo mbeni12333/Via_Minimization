@@ -5,18 +5,16 @@ Graph* init_graph(Netlist* nl){
   // on assume que la netlist est complette
   // ok alors on veut avoir un tableau des noeud segment
   // et un autre sur les noeud points
-  Segment** T_Seg = tableau_segments(nl, 1);
+  Segment** T_Seg = tableau_segments(nl);
   Point** T_Pt = tableau_points(nl);
 
 
   // creation du tableau d'affectations
-  int* affectation_via = (int*)malloc(sizeof(int)*nl->nbPt);
-
+  // callocl()
   Graph* g = (Graph*)malloc(sizeof(Graph));
   g->T_Seg = T_Seg;
   g->T_Pt = T_Pt;
-  g->affectation_via = affectation_via;
-
+  
 
   return g;
 }
@@ -77,12 +75,12 @@ void methode_naiif(Graph* G, Netlist* nl){
   for(i=0; i<nl->nbPt; i++){
     G->affectation_via[i] = isVia(G, G->T_Pt[i]);
   }
-
+ 
   return;
 }
 void graph_dot(Graph* g, Netlist* nl){
-  // pour chaque sommet on cree le block ou cercle
-  // on cree les connections
+  // pour chaque sommet on cree le block ou cercle 
+  // on cree les connections 
   // format P12 pour dire point 12
   // S10 pour dire le segment 10
 }
@@ -105,7 +103,7 @@ int nbr_via(Graph* g, Netlist* nl){
   int i = 0;
   int cpt = 0;
   for(i=0; i<nl->nbPt;i++){
-    if(!g->affectation_via[i])cpt++;
+    if(!g->affectation_via)cpt++;
   }
   return cpt;
 }

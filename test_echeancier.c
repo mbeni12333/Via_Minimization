@@ -24,15 +24,14 @@ int main(int argc, char** argv){
     // suppresion de l'ESPACE
     //Echeancier* E = creer_echeancier(netlist);
     if(atoi(argv[2]) == 2){
-    	cpt = intersect_baleyage_avl(netlist);
+    	int cpt = intersect_baleyage_avl(netlist);
 		}
     else {
-			cpt = intersect_baleyage(netlist);
+			int cpt = intersect_baleyage(netlist);
 		}
-    clock_t end = clock() - t;
     time = (double)(clock() - t)/CLOCKS_PER_SEC;
 
-    printf("Time needed in cycles=%ld;segments=%d;intersections found=%d\n", end,netlist->nbSeg, cpt);
+    printf("Time needed = %.5f s, intersections found = %d\n", time, cpt);
     //free_echeancier(E);
     return 0;
 }
