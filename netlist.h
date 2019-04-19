@@ -31,14 +31,15 @@ void free_netlist(Netlist* nl);
 void sauvegarder_netlsit(Netlist* nl);
 /*Afficher une netlist*/
 void afficher_netlist(Netlist* nl);
-/*Enregister les intersesction dans un fichier .init*/
-void sauvegarder_intersections(Netlist* nl, char* nomFichier);
+
 /*Charger les intersections*/
 void charger_intersections(Netlist* nl, char* nomFichier);
 /*Visualisation Netlist*/
 void visualiser_netlist(Netlist* nl, char* nomFichier);
+
 /*Sauvegarde des segments*/
 void sauvegarde_intersection(Netlist * nl, char* nom_fichier); 
 /*Sauvegarde de la netliste*/
 void sauvegarde_de_la_netlist(Netlist * nl, char* nom_fichier);
+
 #endif

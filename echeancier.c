@@ -395,7 +395,31 @@ int intersect_baleyage(Netlist* nl){
 //afficher_echeancier(E);
 return cpt_intersect;
 }
-
+/*Fonction recursif qui permet de verifier intersection dans tout le sous arbre
+  du plus petit au plus grand
+*/
+void helper_avl_intersecter(AVL* head, Segment* v, int* compteur, double y1, double y2){
+  // cas de base
+  if(!head){
+    return;
+  }
+  //printf("Hy i exist\n");
+  // fils fauche
+  if(head->clef >= y1)
+  helper_avl_intersecter(head->fils_gauche, v, compteur, y1, y2);
+  //traitement necessaire
+  // le segment actuelle n'est pas du meme reseau que v
+  if((head->seg->NumRes != v->NumRes) && head->clef >= y1 && head->clef <= y2){
+    // on ajoute les intersection
+      ajouter_segment(&v->Lintersec, head->seg);
+      ajouter_segment(&(head->seg)->Lintersec, v);
+      // on incremente le compteur d'intetrsection
+      *compteur = *compteur + 1;
+  }
+  // fils droite
+  if(head->clef <= y2)
+  helper_avl_intersecter(head->fils_droite, v, compteur, y1, y2);
+}
 int intersect_baleyage_avl(Netlist* nl){
     // cree l'echeancier
     int cpt = 0;
@@ -411,12 +435,13 @@ int intersect_baleyage_avl(Netlist* nl){
     for(i=0; i<cpt; i++){
         // pour chaque Extremite
         ext = current_echeancier->ext;
-        printf("\nkrha rani hna \n");
-        afficher_AVL(cell_seg);
+        //printf("\ntout marche bien \n");
+        //afficher_AVL(cell_seg);
         switch(ext->VouGouD){
             case 1: ;Ajout_segment_AVL(&cell_seg, ext->seg, nl);
                 break;
-            case 2: ;Suppression_segment_AVL(&cell_seg, ext->seg, nl);printf("Hey i'm deleting\n");
+
+            case 2: ;Suppression_segment_AVL(&cell_seg, ext->seg, nl, nl->T_Res[ext->seg->NumRes]->T_Pt[ext->seg->p1]->y);//printf("Hey i'm deleting\n");
                 break;
             case 0:; Segment* v = ext->seg;
                      Reseau* r = nl->T_Res[v->NumRes];
@@ -428,25 +453,32 @@ int intersect_baleyage_avl(Netlist* nl){
                         y2 = max(p1->y, p2->y);
 
                     AVL* avl_h = prem_segment_avl(cell_seg, y1, y2); // a faire en minirecursif
-                    Cell_segment* cell_h = avl2list(avl_h);
-                    Cell_segment* current = cell_h;
+                    //afficher_AVL(avl_h);
+                    //printf("\n");
+                    //printf("y min = %d, ymax = %d\n", y1, y2);
+                    // appel recursif sur ce sous arbre et execution
+                    helper_avl_intersecter(avl_h, v, &cpt_intersect, y1, y2);
+                    /*Cell_segment* cell_h = avl2list(avl_h);
+                    Cell_segment* current = cell_h;*/
                     // tant que la liste n'est pas vide
-                     while(current){
+                    /* while(current){
                             if(cell_h->seg->NumRes != v->NumRes){
                                 ajouter_segment(&v->Lintersec, current->seg);
                                 ajouter_segment(&(current->seg)->Lintersec, v);
                                 cpt_intersect++;
                             }
                             //h = AuDessus(nl, cell_h, y2);
-                            current = current->suiv; 
-                    }
+                            current = current->suiv;
+                    }*/
                         // faut liberer espace liste
-                    
+
                 break;
             default:
                 fprintf(stderr, "EREUUUUUUUUUUURRRR !!! \n");
                 return 0;
         }
+        // librer_avl
+
         // on incremente le pointeur de l'echeancier
         current_echeancier = current_echeancier->suiv;
     }

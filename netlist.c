@@ -36,6 +36,8 @@ Netlist* read_net_from_file(char* file){
   double xmin, ymin, xmax, ymax; // utile plus tard svg
   int nbSeg = 0; // utile
   int nbPt = 0;
+  int numPt=0;
+  int numSg=0;
   // si le fichier n'existe pas
   if(!f){
     fprintf(f, "Erreur d'ouverture fichier net\n");
@@ -86,7 +88,7 @@ Netlist* read_net_from_file(char* file){
         ymin = y;
       }
       // on cree le point et on l'ajoute au reseau
-      Point* current_point = initialize_point(x, y, NumRes);
+      Point* current_point = initialize_point(x, y, NumRes, numPt++);
       if(!current_point){
         return NULL;
       }
@@ -101,7 +103,7 @@ Netlist* read_net_from_file(char* file){
 
       int HouV = T_Pt[p1]->x == T_Pt[p2]->x;
       // on cree le segment
-      Segment* current_segment =  initialize_segment(NumRes , p1, p2, HouV);
+      Segment* current_segment =  initialize_segment(NumRes , p1, p2, HouV, numSg++);
       if(!current_segment){
         return NULL;
       }
@@ -154,7 +156,7 @@ Segment** tableau_segments(Netlist* nl){
         current_seg = current_liste->seg;
 
         if(!current_seg->printed){
-          T_Seg[cpt++] = current_seg;
+          T_Seg[current_seg->numSg] = current_seg;
           current_seg->printed = 1;
         }
         //printf("Cpt = %d\n", cpt);
@@ -164,6 +166,11 @@ Segment** tableau_segments(Netlist* nl){
 
   //printf("NbSeg = %d\n", nbseg);
   }
+	i = 0;  
+	for(i=0; i<nl->nbSeg;i++){
+    //printf("khra");
+		T_Seg[i]->printed = 0;
+	}
   return T_Seg;
 }
 Point** tableau_points(Netlist* nl){
@@ -251,12 +258,6 @@ void visualiser_netlist(Netlist* nl, char* nomFichier){
   SVGfinalize(&img);
   // on libere l'espace memoire
 }
-
-
-
-
-
-
 
 /*Cette fonction permet de sauvegarder un reseau*/
 void sauvegarde_de_la_netlist(Netlist *nl, char* nom_fichier){

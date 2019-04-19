@@ -8,37 +8,46 @@ Graph* init_graph(Netlist* nl){
   Segment** T_Seg = tableau_segments(nl);
   Point** T_Pt = tableau_points(nl);
 
-
-  // creation du tableau d'affectations
-  // callocl()
+  int* affectation_via = (int*)malloc(sizeof(int)*nl->nbPt);
+  int i=0;
+  for(i=0; i<nl->nbPt;i++){
+    affectation_via[i] = -1;
+  }
+  // creation du tableau d'affectation  // callocl()
   Graph* g = (Graph*)malloc(sizeof(Graph));
   g->T_Seg = T_Seg;
   g->T_Pt = T_Pt;
+  g->affectation_via = affectation_via;
   
 
   return g;
 }
 void afficher_graph(Netlist* nl, Graph* g, char* nomFichier){
   int i;
+  //SVGlineRandColor(&img);
   SVGinit(&img, nomFichier, nl->xmin, nl->ymin, nl->xoffsef, nl->yoffset);
   SVGlineRandColor(&img);
   SVGgroup(&img);
   for(i=0; i<nl->nbSeg;i++){
-    if(g->T_Seg[i]->affectation){
+    if(g->T_Seg[i]->affectation == 1){
        afficher_segment(g->T_Seg[i]);
        //printf("H\n");
     }
   }
   SVGgroup_end(&img);
 
-  //SVGlineRandColor(&img);
+  SVGlineRandColor(&img);
   SVGgroup(&img);
   for(i=0; i<nl->nbSeg;i++){
-    if(!(g->T_Seg[i]->affectation)){
+    if((g->T_Seg[i]->affectation) == 2){
       // dashed
        afficher_segment(g->T_Seg[i]);
        //printf("V\n");
     }
+  }
+  for(i=0; i<nl->nbPt;i++){
+    if(!g->affectation_via[i])
+      SVGpoint(&img, g->T_Pt[i]->x, g->T_Pt[i]->y);
   }
   SVGgroup_end(&img);
   SVGfinalize(&img);
@@ -56,12 +65,12 @@ int isVia(Graph* g, Point* p){
   while(cell->suiv){
     if(cell->suiv->seg->affectation != h){
       // c'est un via
-      return 1;
+      return 0;
     }
     cell = cell->suiv;
   }
   // n'est pas via
-  return 0;
+  return 1;
 }
 void methode_naiif(Graph* G, Netlist* nl){
   // creation de S

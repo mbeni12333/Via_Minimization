@@ -21,7 +21,7 @@ AVL* Ajout_feuille(Segment * seg, Netlist *n);
 /*Ajout d'un segment dans l'arbre AVL*/
 void Ajout_segment_AVL(AVL** ab, Segment* s, Netlist * n);
 /*Suppression d'un segment dans l'arbre AVL*/
-void Suppression_segment_AVL(AVL **ab, Segment* s , Netlist* n);
+void Suppression_segment_AVL(AVL **ab, Segment* s , Netlist* n, double y);
 /*Liberation de l'espace alloué pour l'AVL*/
 void free_AVL(AVL **ab);
 //Rotation Droite

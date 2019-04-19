@@ -9,7 +9,7 @@
 **************************************************************/
 
 /*Fonction d'initialisation*/
-Point* initialize_point(double x, double y, int num_res);
+Point* initialize_point(double x, double y, int num_res, int numPt);
 /*Creation de copie*/
 Point* copie_point(Point* pt);
 /*Afficher une netlist*/

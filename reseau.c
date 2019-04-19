@@ -21,7 +21,7 @@ Reseau* initilize_reseau(int NumRes, int NbPt, int NbSeg){
   }
   // sinon on initilise les pointeur a NULL
   temp->T_Pt = T_Pt;
-  
+
 
   // finallement on retourne le pointeur
   return temp;

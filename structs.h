@@ -23,7 +23,7 @@ typedef struct segment{
 
     int HouV; /* 0 si Horizontal et 1 si Vertical */
     int printed;
-    int numseg;
+    int numSg;
     int affectation;
     struct cell_segment *Lintersec; /* Liste des segments en intersection */
 
@@ -42,7 +42,7 @@ typedef struct cell_segment{
 typedef struct point{
 
     double x,y;/* Coordonnees du point */
-    int numpt;
+    int numPt;
     int num_res;/* Numero du reseau contenant ce point = Index du tableau T_res*/
     Cell_segment* Lincid;/* Liste des segments incidents a ce point */
 
@@ -96,7 +96,7 @@ typedef struct noeud_graph_seg{
 typedef struct graph{
   Point** T_Pt;
   Segment** T_Seg;
-  int* affectation_face;
+  //int* affectation_face;
   int* affectation_via;
 }Graph;
 

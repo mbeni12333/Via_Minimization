@@ -20,19 +20,19 @@ int main(int argc, char** argv){
     //afficher_netlist(netlist);
     // affichage
     //afficher_netlist(netlist);
-        sauvegarde_de_la_netlist(netlist, "test_sauvegarde");
     clock_t t = clock();
     // suppresion de l'ESPACE
     //Echeancier* E = creer_echeancier(netlist);
     if(atoi(argv[2]) == 2){
-    	int cpt = intersect_baleyage_avl(netlist);
+    	cpt = intersect_baleyage_avl(netlist);
 		}
     else {
-			int cpt = intersect_baleyage(netlist);
+			cpt = intersect_baleyage(netlist);
 		}
+    clock_t end = clock() - t;
     time = (double)(clock() - t)/CLOCKS_PER_SEC;
 
-    printf("Time needed = %.5f s, intersections found = %d\n", time, cpt);
+    printf("Time needed in cycles=%ld;segments=%d;intersections found=%d\n", end,netlist->nbSeg, cpt);
     //free_echeancier(E);
     return 0;
 }

@@ -99,7 +99,7 @@ void Ajout_segment_AVL(AVL **ab, Segment* s , Netlist* n){
 
 }
 //suppression d'un segment
-void Suppression_segment_AVL(AVL **ab, Segment* s , Netlist* n){
+void Suppression_segment_AVL(AVL **ab, Segment* s , Netlist* n, double y){
     //int h = 1; NON
     int diff; // Oui :D
     if (!s || !n)return;
@@ -108,11 +108,11 @@ void Suppression_segment_AVL(AVL **ab, Segment* s , Netlist* n){
         //printf("Aucun element a supprimer...");
         return;
     }
-
-    double y = n->T_Res[s->NumRes]->T_Pt[s->p1]->y;
+    /* y pour la clef, mais l'element a supprimer est s*/
     /*if(*ab == NULL)
       return; //Cas ou il n'y a qu'un noeud dans l'arbre*/
-    if((*ab)->clef == y){
+    if((*ab)->seg == s){
+
       if(!(*ab)->fils_gauche  || !(*ab)->fils_droite ){
           AVL* tmp = (*ab)->fils_gauche ? (*ab)->fils_gauche: (*ab)->fils_droite;
           /*if((*ab)->fils_gauche){
@@ -124,6 +124,7 @@ void Suppression_segment_AVL(AVL **ab, Segment* s , Netlist* n){
 
           free(*ab);
           *ab = tmp;
+          //printf("wait a secondd ..... \n");
           return;
           /*
           if (tmp == NULL){
@@ -139,9 +140,9 @@ void Suppression_segment_AVL(AVL **ab, Segment* s , Netlist* n){
           //On recupere le minimum du sous arbre de droite
           AVL* pointeur_min = recup_min(&(*ab)->fils_droite);
           AVL* racine = *ab;
-          if(!pointeur_min){
-              printf("WTF MAN\n");
-          }
+          /*if(!pointeur_min){
+              printf("pourquoi\n");
+          }*/
           // on met le min dans la position de la racine
           pointeur_min->fils_gauche = racine->fils_gauche;
           pointeur_min->fils_droite = racine->fils_droite;
@@ -149,12 +150,19 @@ void Suppression_segment_AVL(AVL **ab, Segment* s , Netlist* n){
           // on pointe la racine vers la nouvelle racine
           *ab = pointeur_min;
           free(racine);
-          printf("\nmin = %.f, ancien racine = %.f\n", pointeur_min->clef, racine->clef);
+          //printf("\nmin = %.f, ancien racine = %.f\n", pointeur_min->clef, racine->clef);
           return;
       }
-
-    (*ab)->clef > y ? Suppression_segment_AVL(&((*ab)->fils_gauche),s,n):
-                      Suppression_segment_AVL(&((*ab)->fils_droite),s,n);
+      // probleme avec arbre avl, un element egale, s'incere en fils_gauche
+      // si il est egale a la racine, sauf que, si on fait une operation
+      // d'equilibre on risque de violer cette proprieté
+      if((*ab)->clef == y){
+        Suppression_segment_AVL(&((*ab)->fils_gauche),s,n, y);
+        Suppression_segment_AVL(&((*ab)->fils_droite),s,n, y);
+      }else{
+          (*ab)->clef > y ? Suppression_segment_AVL(&((*ab)->fils_gauche),s,n, y):
+                      Suppression_segment_AVL(&((*ab)->fils_droite),s,n, y);
+      }
     /*
     if((*ab)->clef > y){
           Suppression_segment_AVL(&((*ab)->fils_gauche),s,n);
@@ -192,11 +200,11 @@ AVL* recup_min(AVL** ab){
         min->fils_gauche = NULL;
         return min;
     }
-    
+
     AVL* tmp = recup_min(&(*ab)->fils_gauche);
-    if(!tmp){
-        printf("WTFFFFUUFFFF '-' \n");
-    }
+    /*if(!tmp){
+        printf("WWHYYY'-' \n");
+    }*/
     int diff = getDiff(*ab);
 
 
@@ -225,7 +233,7 @@ void afficher_AVL(AVL* a){
     if(!a){
         return;
     }
-    
+
     afficher_AVL(a->fils_gauche);
     printf("%.f ", a->clef);
     afficher_AVL(a->fils_droite);
@@ -247,8 +255,35 @@ void free_AVL(AVL **ab){
 
 }
 AVL* prem_segment_avl(AVL* a, double y1, double y2){
-    return NULL;   
+    // on cheche le sous arbre qui a des element compris entre
+    // y1 et y2, pour cela on cherche d'abords les element plus
+    // grand que y1, ensuite, on cherche le sous arbre qui a des element tous plus
+    // petit que y2 et on retourne ce sous arbre
+
+
+
+    while(a && a->clef < y1){
+      a = a->fils_droite;// on cherhce un element plus grand
+    }
+    //if(a)printf("a clef = %.f y1 = %.f\n", a->clef, y1);
+    //return a;
+    // on est verifier
+    // abre vide
+    // dans ce cas on a trouvé l'element qui a un y >= y1 reste a limité le sous arbre
+    // en selectionant le sous arbre des clef > y2
+    while(a && a->clef > y2){
+      a = a->fils_gauche; // on cherche element plus petit
+    }
+    //if(a)printf("a clef = %.f y1 = %.f y2 = %.f\n", a->clef, y1, y2);
+
+    // si a vide alors il n'ya pas nos elements
+    // sinon a pointe vers le premier element qui ne satisfait Pas
+    // la condition c'est a dire a->clef <= y2
+
+    // on retourne un pointeur vers la tete du sous arbre
+    return a;
 }
+/* pas utile finalllement
 Cell_segment* avl2list(AVL* a){
     return NULL;
-}
+}*/

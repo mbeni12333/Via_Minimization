@@ -15,6 +15,7 @@ int main(int argc, char** argv){
     double time;
     char* file = argv[1];
     Netlist* netlist = read_net_from_file(file);
+     sauvegarde_de_la_netlist(netlist, "test_sauvegarde");
     //printf("Netlist : %d\n", netlist->NbRes);
     //afficher_netlist(netlist);
     // affichage
@@ -22,7 +23,8 @@ int main(int argc, char** argv){
     clock_t t = clock();
     // suppresion de l'ESPACE
     int intersect = intersect_naif(netlist);
+    clock_t end = clock() - t;
     time = (double)(clock() - t)/CLOCKS_PER_SEC;
-    printf("Time needed = %.5f s, intersections found = %d\n", time, intersect);
+    printf("Time needed in cycles=%ld;segments=%d;intersections found=%d\n", end,netlist->nbSeg, intersect);
     return 0;
 }

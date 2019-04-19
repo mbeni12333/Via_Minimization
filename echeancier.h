@@ -25,9 +25,11 @@ void merge_sort(Echeancier** E);
 /*Liberer echeancier*/
 void free_echeancier(Echeancier* E);
 /*Affichage echeancier pour debogage*/
-
-int intersect_baleyage(Netlist* nl);
-
 void afficher_echeancier(Echeancier* E);
+/*algorithme balayage*/
+// par liste chainé
+int intersect_baleyage(Netlist* nl);
+// par avl
+int intersect_baleyage_avl(Netlist* nl);
 
 #endif
