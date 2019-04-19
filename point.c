@@ -1,6 +1,6 @@
 #include "point.h"
 
-Point* initialize_point(double x, double y, int num_res){
+Point* initialize_point(double x, double y, int num_res, int numPt){
   Point* temp = (Point*)malloc(sizeof(Point));
   // s'il y a une erreur
   if(!temp){
@@ -12,7 +12,7 @@ Point* initialize_point(double x, double y, int num_res){
   temp->y = y;
   temp->num_res = num_res;
   temp->Lincid = NULL; // pour l'instant
-
+  temp->numPt = numPt;
   return temp;
 }
 

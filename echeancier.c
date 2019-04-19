@@ -253,7 +253,7 @@ Echeancier* creer_echeancier(Netlist* nl, int *cpt){
     Echeancier* E; // pointe vers la tete
     Echeancier* tail; // pointe vers la fin
     /*On remplit d'abords un tableau de segments*/
-    Segment** T = tableau_segments(nl);
+    Segment** T = tableau_segments(nl, 0);
     if(!T){
         fprintf(stderr, "Erreur Tableau segments vide\n");
         return NULL;
@@ -477,6 +477,8 @@ int intersect_baleyage_avl(Netlist* nl){
                 fprintf(stderr, "EREUUUUUUUUUUURRRR !!! \n");
                 return 0;
         }
+        // librer_avl
+
         // on incremente le pointeur de l'echeancier
         current_echeancier = current_echeancier->suiv;
     }

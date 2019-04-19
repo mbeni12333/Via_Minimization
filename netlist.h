@@ -18,7 +18,7 @@ Netlist* initialize_netlist(int NbRes);
 /*Cette fonction permet de lire un reseau*/
 Netlist* read_net_from_file(char* file);
 /*Tableau de segments*/
-Segment** tableau_segments(Netlist* nl);
+Segment** tableau_segments(Netlist* nl, int reverse);
 /*Tableau de points*/
 Point** tableau_points(Netlist* nl);
 /*Nombre de segment de la netlist*/

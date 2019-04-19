@@ -32,17 +32,17 @@ int main(int argc , char** argv){
     while(Head->fils_gauche){
       //afficher_AVL(Head);
       //printf("\n");
-      Suppression_segment_AVL(&Head, Head->seg, netlist);
+      Suppression_segment_AVL(&Head, Head->seg, netlist, Head->clef);
       afficher_AVL(Head);
       printf("\n\n");
     }
 
 
-    Suppression_segment_AVL(&Head, Head->seg, netlist);
+    Suppression_segment_AVL(&Head, Head->seg, netlist, Head->clef);
     afficher_AVL(Head);
     printf("\n");
 
-    
+
 
     return 0;
 }

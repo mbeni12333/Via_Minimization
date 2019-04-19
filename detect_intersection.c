@@ -70,7 +70,7 @@ int intersection(Netlist* nl, Segment *s1, Segment *s2){
 /*Algorithms*/
 int intersect_naif(Netlist* nl){
   // on construit le tableau des segment a partir de nl
-  Segment** T_Seg = tableau_segments(nl);
+  Segment** T_Seg = tableau_segments(nl, 0);
   int nbseg = nbSeg(nl);
   // erreur
   if(!T_Seg){
@@ -104,4 +104,4 @@ int verifier_nbintersection(Netlist* nl){
 
 
 /*Fonction standard*/
-void sauvgarder_intersections(Netlist* nl,char* nomfichier);
+//void sauvgarder_intersections(Netlist* nl,char* nomfichier);
