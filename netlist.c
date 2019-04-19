@@ -62,7 +62,7 @@ Netlist* read_net_from_file(char* file){
     nbSeg+=NbSeg;
     nbPt+=NbPt;
     // on cree le reseau et on l'ajoute au netlist
-    Reseau* current_reseau = initilize_reseau(NumRes, NbPt);
+    Reseau* current_reseau = initilize_reseau(NumRes, NbPt, NbSeg);
     if(!current_reseau){
       return NULL;
     }
@@ -250,4 +250,105 @@ void visualiser_netlist(Netlist* nl, char* nomFichier){
   // on finalise le fichier
   SVGfinalize(&img);
   // on libere l'espace memoire
+}
+
+
+
+
+
+
+
+/*Cette fonction permet de sauvegarder un reseau*/
+void sauvegarde_de_la_netlist(Netlist *nl, char* nom_fichier){
+  if (nl == NULL){
+    fprintf(stderr,"Netlist vide... \n");
+    return;
+  }
+  // on commence par ouvrir le fichier
+  FILE* f = fopen(nom_fichier, "w");
+  int i,j,k;
+  int nbRes = nl->NbRes;
+  
+  // test d'allocation
+  if(!f){
+    fprintf(stderr, "Erreur d'ouverture fichier net\n");
+    return;
+  }
+  // sinon on parcours la netliste
+  fprintf(f, "%d\n",nbRes);
+
+  for (i = 0; i<nbRes;i++){
+    
+    fprintf(f, "%d ",i);
+    fprintf(f, "%d ",nl->T_Res[i]->NbPt);
+    fprintf(f, "%d \n",nl->T_Res[i]->NbSeg);
+    for(j = 0;j<nl->T_Res[i]->NbPt;j++){
+      printf("Res %d\n", i);
+      fprintf(f, "\t%d ",j);
+      fprintf(f, "%.f ",nl->T_Res[i]->T_Pt[j]->x);
+      fprintf(f, "%.f \n",nl->T_Res[i]->T_Pt[j]->y);
+    }
+      for(j=0;j<nl->T_Res[i]->NbPt;j++){
+
+        Point *tmp = nl->T_Res[i]->T_Pt[j];
+        Cell_segment* current = tmp->Lincid;
+        while(current){
+          if(current->seg->printed == 0){
+            fprintf(f, "\t%d ",current->seg->p1);
+            fprintf(f, "%d \n",current->seg->p2);
+            current->seg->printed =1;
+          }
+          current=current->suiv;
+        }
+        
+      }
+      for(j=0;j<nl->T_Res[i]->NbPt;j++){
+
+        Point *tmp = nl->T_Res[i]->T_Pt[j];
+        Cell_segment* current= tmp->Lincid;
+        while(current){
+          current->seg->printed = 0;
+          current = current->suiv;
+        }
+    }
+  }
+}
+
+
+
+void sauvegarde_intersection(Netlist* nl,char * nom_fichier){
+  if(nl==NULL){
+    fprintf(stderr,"Netlist vide !\n");
+    return;
+  }
+  int i,j;
+  int nbRes = nl->NbRes;
+  FILE *f = fopen(nom_fichier,"w");
+  if (f==NULL){
+    fprintf(stderr,"Erreur lors de l'ouverture du fichier \n");
+    return;
+  }
+  for (i = 0; i< nbRes; i++){
+    for(j=0;j< nl->nbPt;j++){
+        Cell_segment* L_seg = nl->T_Res[i]->T_Pt[j]->Lincid;
+        while(L_seg){
+          Segment* seg_current = L_seg->seg;
+          Cell_segment* L_intersections = seg_current->Lintersec;
+          while(L_intersections){
+
+            if (L_intersections->seg->printed == 0){
+              fprintf(f,"%d %d %d %d %d %d \n",seg_current->NumRes, seg_current->p1, seg_current->p2, L_intersections->seg->NumRes, L_intersections->seg->p1, L_intersections->seg->p2 );
+            }
+            L_intersections = L_intersections->suiv;
+          }
+          
+      L_seg->seg->printed = 1;
+      L_seg = L_seg->suiv;
+    }
+
+    }
+  
+  }
+
+
 }

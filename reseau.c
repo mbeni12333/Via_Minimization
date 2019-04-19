@@ -1,6 +1,6 @@
 #include "reseau.h"
 
-Reseau* initilize_reseau(int NumRes, int NbPt){
+Reseau* initilize_reseau(int NumRes, int NbPt, int NbSeg){
   Reseau* temp = (Reseau*)malloc(sizeof(Reseau));
   // s'il y a une erreur
   if(!temp){
@@ -10,6 +10,7 @@ Reseau* initilize_reseau(int NumRes, int NbPt){
   // sinon on initilise
   temp->NumRes = NumRes;
   temp->NbPt = NbPt;
+  temp->NbSeg = NbSeg;
   // on initialise dynamiquement tableau de points
   Point** T_Pt = (Point**)malloc(sizeof(Point*)*NbPt);
   // si il ya un probleme d'Allocation
@@ -20,7 +21,7 @@ Reseau* initilize_reseau(int NumRes, int NbPt){
   }
   // sinon on initilise les pointeur a NULL
   temp->T_Pt = T_Pt;
-
+  
 
   // finallement on retourne le pointeur
   return temp;

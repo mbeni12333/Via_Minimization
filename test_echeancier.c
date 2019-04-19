@@ -20,6 +20,7 @@ int main(int argc, char** argv){
     //afficher_netlist(netlist);
     // affichage
     //afficher_netlist(netlist);
+        sauvegarde_de_la_netlist(netlist, "test_sauvegarde");
     clock_t t = clock();
     // suppresion de l'ESPACE
     //Echeancier* E = creer_echeancier(netlist);

@@ -9,7 +9,7 @@
 * Ensemble des fonction Reseaux                            *
 ***********************************************************/
 /*Initialisation de reseau*/
-Reseau* initilize_reseau(int NumRes, int NbPt);
+Reseau* initilize_reseau(int NumRes, int NbPt, int NbSeg);
 /*Affichage de reseau*/
 void afficher_reseau(Reseau* res);
 /*Liberetion espace mempoire reseau*/
